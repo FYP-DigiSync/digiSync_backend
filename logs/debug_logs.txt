@@ -19,3 +19,9 @@
 [API Error][2022-10-19T19:37:56.875Z][#401]: {"type":"error","status":401,"message":"Access denied! No auth Sent"}
 [API Error][2022-10-19T19:38:30.313Z][#401]: {"type":"error","status":401,"message":"Authentication failed! No user found"}
 [API Error][2022-10-19T19:39:34.687Z][#500]: {"type":"error","status":500,"message":"CustomError is not defined"}
+[API Error][2022-10-19T19:59:35.632Z][#400]: {"type":"error","status":400,"message":"Input validation failed!","errors":[{"msg":"first Name is Required","param":"firstName","location":"body"},{"msg":"last Name is required","param":"lastName","location":"body"},{"msg":"Country is required","param":"country","location":"body"},{"msg":"Email is required","param":"email","location":"body"},{"msg":"Phone Number is required","param":"phoneNumber","location":"body"},{"msg":"user password is require","param":"password","location":"body"}]}
+[API Error][2022-10-19T20:00:13.553Z][#400]: {"type":"error","status":400,"message":"Input validation failed!","errors":[{"msg":"Email is required","param":"email","location":"body"},{"msg":"Password is required","param":"password","location":"body"}]}
+[API Error][2022-10-19T20:00:59.549Z][#401]: {"type":"error","status":401,"message":"Invalid password! Please try again with valid password."}
+[API Error][2022-10-19T20:02:03.366Z][#401]: {"type":"error","status":401,"message":"Password does not match! Enter correct password"}
+[API Error][2022-10-19T20:02:48.809Z][#401]: {"type":"error","status":401,"message":"No user exist with email address."}
+[API Error][2022-10-19T20:03:13.489Z][#401]: {"type":"error","status":401,"message":"No user exist with this email address."}

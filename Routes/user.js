@@ -4,11 +4,12 @@ const userController= require('../Controllers/userController');
 const asyncWrapper= require('../Middleware/asycWrapper');
 const auth= require('../Middleware/authMiddleware');
 // validation for request body
-const {createUserSchema}= require('../Middleware/Validators/userValidator');
+const {createUserSchema,signInUserSchema}= require('../Middleware/Validators/userValidator');
 
 
 // routes
 router.post('/', createUserSchema, asyncWrapper(userController.createUser));
 router.get('/whoiam',auth(), asyncWrapper(userController.decodetoken));
+router.post('/signin', signInUserSchema, asyncWrapper(userController.signIn));
 
 module.exports = router;
