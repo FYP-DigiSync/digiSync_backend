@@ -3,6 +3,10 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const mongoose = require('mongoose');
+const errorHandler= require('./Utils/errorHandler');
+
+// route implemented imports
+const userRoute = require("./Routes/user");
 
 
 // General ApI information
@@ -22,7 +26,15 @@ app.use(express.json());
 app.use(cors());
 app.options("*", cors());
 
-// API Information Endpoint
+
+
+// API Application Routes
+app.use(`/${api_name}/${api_version}/user`, userRoute);
+
+
+
+
+// Generic API Information Endpoint
 app.use('/info', (req, res, next) => {
   res.status(200).json({
       "Name": api_name,
@@ -30,13 +42,10 @@ app.use('/info', (req, res, next) => {
   });
 });
 
-// API Application Routes
-
-
-// 404 Error
-// app.all("*", (req, res, next) => {
-//   return next(new CustomError(404, "Routes Not found"));
-// });
+// 404 Error on the API
+app.all("*", (req, res, next) => {
+  return next(new errorHandler(404, "Routes Not found"));
+});
 
 // app.use(errorMiddleware);
 
