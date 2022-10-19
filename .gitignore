@@ -1,0 +1,7 @@
+### Ignore Node Modules ###
+node_modules/
+/node_modules
+
+# editor specific file 
+.vscode/
+.env
