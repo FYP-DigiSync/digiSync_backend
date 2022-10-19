@@ -4,6 +4,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const mongoose = require('mongoose');
 const errorHandler= require('./Utils/errorHandler');
+const errorMiddleware= require('./Middleware/errorMiddleware')
 
 // route implemented imports
 const userRoute = require("./Routes/user");
@@ -29,10 +30,7 @@ app.options("*", cors());
 
 
 // API Application Routes
-app.use(`/${api_name}/${api_version}/user`, userRoute);
-
-
-
+app.use(`/${api_name}/api/v${api_version}/user`, userRoute);
 
 // Generic API Information Endpoint
 app.use('/info', (req, res, next) => {
@@ -47,7 +45,7 @@ app.all("*", (req, res, next) => {
   return next(new errorHandler(404, "Routes Not found"));
 });
 
-// app.use(errorMiddleware);
+app.use(errorMiddleware);
 
 const port= process.env.PORT || 3000;
 const mongoURL = process.env.MONGO_URL;
