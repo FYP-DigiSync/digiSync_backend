@@ -13,3 +13,9 @@
 [API Error][2022-10-19T19:08:54.023Z][#500]: {"type":"error","status":500,"message":"User validation failed: password: Path `password` is required., phoneNumber: Path `phoneNumber` is required., email: Path `email` is required., country: Path `country` is required., lastName: Path `lastName` is required."}
 [API Error][2022-10-19T19:09:58.757Z][#500]: {"type":"error","status":500,"message":"User validation failed: password: Path `password` is required., phoneNumber: Path `phoneNumber` is required., email: Path `email` is required., country: Path `country` is required., lastName: Path `lastName` is required., firstName: Path `firstName` is required."}
 [API Error][2022-10-19T19:10:29.679Z][#500]: {"type":"error","status":500,"message":"E11000 duplicate key error collection: test.users index: email_1 dup key: { email: \"anas@gmail.com\" }"}
+[API Error][2022-10-19T19:32:56.090Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2022-10-19T19:37:40.761Z][#401]: {"type":"error","status":401,"message":"Access denied! No auth Sent"}
+[API Error][2022-10-19T19:37:48.765Z][#401]: {"type":"error","status":401,"message":"Access denied! No auth Sent"}
+[API Error][2022-10-19T19:37:56.875Z][#401]: {"type":"error","status":401,"message":"Access denied! No auth Sent"}
+[API Error][2022-10-19T19:38:30.313Z][#401]: {"type":"error","status":401,"message":"Authentication failed! No user found"}
+[API Error][2022-10-19T19:39:34.687Z][#500]: {"type":"error","status":500,"message":"CustomError is not defined"}

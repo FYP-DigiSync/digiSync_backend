@@ -29,8 +29,11 @@ class userController{
         return res.status(201).json({token: jwt});
     }
 
-    getUser= async (req, res, next) => {
-        return res.status(200).json("Sucessfully logged in");
+
+    // get a user with the given id
+    decodetoken = async(req, res, next) => {
+        const { firstName,lastName, country, email, phoneNumber  } =req.thisuser;
+        return res.status(200).json({firstName,lastName, country, email, phoneNumber});
     }
 }
 
