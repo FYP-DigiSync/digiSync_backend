@@ -25,3 +25,12 @@
 [API Error][2022-10-19T20:02:03.366Z][#401]: {"type":"error","status":401,"message":"Password does not match! Enter correct password"}
 [API Error][2022-10-19T20:02:48.809Z][#401]: {"type":"error","status":401,"message":"No user exist with email address."}
 [API Error][2022-10-19T20:03:13.489Z][#401]: {"type":"error","status":401,"message":"No user exist with this email address."}
+[API Error][2022-10-20T06:19:26.961Z][#400]: {"type":"error","status":400,"message":"Prompt is required"}
+[API Error][2022-10-20T06:21:40.231Z][#400]: {"type":"error","status":400,"message":"Error generation graphics"}
+[API Error][2022-10-20T06:25:00.740Z][#400]: {"type":"error","status":400,"message":"Error generation graphics"}
+[API Error][2022-10-20T06:31:52.602Z][#400]: {"type":"error","status":400,"message":"Error generation graphics"}
+[API Error][2022-10-20T06:36:09.739Z][#400]: {"type":"error","status":400,"message":"Error generation graphics"}
+[API Error][2022-10-20T06:53:46.454Z][#400]: {"type":"error","status":400,"message":"Error generation graphics"}
+[API Error][2022-10-20T06:54:16.010Z][#500]: {"type":"error","status":500,"message":"Response code 404 (NOT FOUND)"}
+[API Error][2022-10-20T06:54:35.462Z][#500]: {"type":"error","status":500,"message":"Response code 404 (NOT FOUND)"}
+[API Error][2022-10-20T07:03:07.470Z][#500]: {"type":"error","status":500,"message":"Response code 404 (NOT FOUND)"}

@@ -8,6 +8,7 @@ const errorMiddleware= require('./Middleware/errorMiddleware')
 
 // route implemented imports
 const userRoute = require("./Routes/user");
+const postRoute = require("./Routes/post"); 
 
 
 // General ApI information
@@ -31,6 +32,7 @@ app.options("*", cors());
 
 // API Application Routes
 app.use(`/${api_name}/api/v${api_version}/user`, userRoute);
+app.use(`/${api_name}/api/v${api_version}/post`, postRoute);
 
 // Generic API Information Endpoint
 app.use('/info', (req, res, next) => {
