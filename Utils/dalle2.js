@@ -28,7 +28,7 @@ class Dalle {
     //   }
     // }).json();
     let task= {
-        id:"task-mWL5qorzdSNDtcO7RRulH6cp"
+        id:"task-a1uBte4BETmj9Lc67T9KuEjq"
     }
     task = await this.getTask(task.id);
     return task;

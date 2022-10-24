@@ -9,7 +9,7 @@ const {createUserSchema,signInUserSchema}= require('../Middleware/Validators/use
 
 // routes
 router.post('/', createUserSchema, asyncWrapper(userController.createUser));
-router.get('/whoiam',auth(), asyncWrapper(userController.decodetoken));
+router.get('/whoami',auth(), asyncWrapper(userController.decodetoken));
 router.post('/signin', signInUserSchema, asyncWrapper(userController.signIn));
 
 module.exports = router;

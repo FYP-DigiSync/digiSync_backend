@@ -16,7 +16,7 @@ class userController{
         }
         const res1 = await userModel.find({ email: req.body.email });
         if (res1 && res1?.email) {
-            return next(new errorHandler(400, "User already exist with the provided email."));
+            return next(new errorHandler(400, "User already exist with this email."));
         }
 
         // store the hash of password in the database

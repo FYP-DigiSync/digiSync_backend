@@ -34,3 +34,55 @@
 [API Error][2022-10-20T06:54:16.010Z][#500]: {"type":"error","status":500,"message":"Response code 404 (NOT FOUND)"}
 [API Error][2022-10-20T06:54:35.462Z][#500]: {"type":"error","status":500,"message":"Response code 404 (NOT FOUND)"}
 [API Error][2022-10-20T07:03:07.470Z][#500]: {"type":"error","status":500,"message":"Response code 404 (NOT FOUND)"}
+[API Error][2022-10-21T08:02:52.725Z][#500]: {"type":"error","status":500,"message":"url is not defined"}
+[API Error][2022-10-21T08:03:40.790Z][#500]: {"type":"error","status":500,"message":"Command failed: Invalid Parameter - -scale\r\n"}
+[API Error][2022-10-21T08:04:25.206Z][#500]: {"type":"error","status":500,"message":"Command failed: Invalid Parameter - -scale\r\n"}
+[API Error][2022-10-21T09:41:03.894Z][#500]: {"type":"error","status":500,"message":"Unsupported MIME type: image/webp"}
+[API Error][2022-10-21T09:50:45.393Z][#500]: {"type":"error","status":500,"message":"Cannot read properties of undefined (reading 'push')"}
+[API Error][2022-10-21T10:08:53.854Z][#500]: {"type":"error","status":500,"message":"Input file is missing: https://openailabsprodscus.blob.core.windows.net/private/user-9YwTx3I1qRfeE2uu776kDNTf/generations/generation-owMT1ydHWvLD6wiP3OSkY0Ax/image.webp?st=2022-10-21T09%3A10%3A06Z&se=2022-10-21T11%3A08%3A06Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/webp&skoid=15f0b47b-a152-4599-9e98-9cb4a58269f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-10-21T09%3A58%3A42Z&ske=2022-10-28T09%3A58%3A42Z&sks=b&skv=2021-08-06&sig=8ZOeoQQaMCsnuP3TiJwy8Owg7BlifeaGak/igYDcXo8%3D"}
+[API Error][2022-10-21T10:21:57.649Z][#500]: {"type":"error","status":500,"message":"Unknown body type 'arraybuffer' in \"https://openailabsprodscus.blob.core.windows.net/private/user-9YwTx3I1qRfeE2uu776kDNTf/generations/generation-owMT1ydHWvLD6wiP3OSkY0Ax/image.webp?st=2022-10-21T09%3A23%3A01Z&se=2022-10-21T11%3A21%3A01Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/webp&skoid=15f0b47b-a152-4599-9e98-9cb4a58269f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-10-21T05%3A23%3A32Z&ske=2022-10-28T05%3A23%3A32Z&sks=b&skv=2021-08-06&sig=qqR8PkzKyccUZK/vs5d9A1Uy6OUUVJWLAwpP1pe1Ib0%3D\" in \"https://openailabsprodscus.blob.core.windows.net/private/user-9YwTx3I1qRfeE2uu776kDNTf/generations/generation-owMT1ydHWvLD6wiP3OSkY0Ax/image.webp?st=2022-10-21T09%3A23%3A01Z&se=2022-10-21T11%3A21%3A01Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/webp&skoid=15f0b47b-a152-4599-9e98-9cb4a58269f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-10-21T05%3A23%3A32Z&ske=2022-10-28T05%3A23%3A32Z&sks=b&skv=2021-08-06&sig=qqR8PkzKyccUZK/vs5d9A1Uy6OUUVJWLAwpP1pe1Ib0%3D\""}
+[API Error][2022-10-21T10:22:47.621Z][#500]: {"type":"error","status":500,"message":"Unknown body type 'arraybuffer' in \"https://openailabsprodscus.blob.core.windows.net/private/user-9YwTx3I1qRfeE2uu776kDNTf/generations/generation-owMT1ydHWvLD6wiP3OSkY0Ax/image.webp?st=2022-10-21T09%3A23%3A52Z&se=2022-10-21T11%3A21%3A52Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/webp&skoid=15f0b47b-a152-4599-9e98-9cb4a58269f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-10-21T03%3A56%3A27Z&ske=2022-10-28T03%3A56%3A27Z&sks=b&skv=2021-08-06&sig=V7i2Mb01TBcPNOqd1AtEVlprfK%2BRW7TZZgC4XWd6n7Y%3D\" in \"https://openailabsprodscus.blob.core.windows.net/private/user-9YwTx3I1qRfeE2uu776kDNTf/generations/generation-owMT1ydHWvLD6wiP3OSkY0Ax/image.webp?st=2022-10-21T09%3A23%3A52Z&se=2022-10-21T11%3A21%3A52Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/webp&skoid=15f0b47b-a152-4599-9e98-9cb4a58269f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-10-21T03%3A56%3A27Z&ske=2022-10-28T03%3A56%3A27Z&sks=b&skv=2021-08-06&sig=V7i2Mb01TBcPNOqd1AtEVlprfK%2BRW7TZZgC4XWd6n7Y%3D\""}
+[API Error][2022-10-21T12:09:42.197Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2022-10-21T12:09:42.357Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2022-10-21T12:43:42.277Z][#500]: {"type":"error","status":500,"message":"Cannot set headers after they are sent to the client"}
+[API Error][2022-10-21T14:01:27.670Z][#400]: {"type":"error","status":400,"message":"Error generation graphics"}
+[API Error][2022-10-21T14:01:40.826Z][#500]: {"type":"error","status":500,"message":"Response code 404 (NOT FOUND)"}
+[API Error][2022-10-21T14:03:35.193Z][#400]: {"type":"error","status":400,"message":"Error generation graphics"}
+[API Error][2022-10-21T14:43:51.452Z][#500]: {"type":"error","status":500,"message":"The \"path\" argument must be of type string or an instance of Buffer or URL. Received an instance of Promise"}
+[API Error][2022-10-21T14:44:22.760Z][#500]: {"type":"error","status":500,"message":"SOI not found"}
+[API Error][2022-10-21T14:45:00.551Z][#500]: {"type":"error","status":500,"message":"SOI not found"}
+[API Error][2022-10-21T14:45:34.433Z][#500]: {"type":"error","status":500,"message":"croppedImage is not defined"}
+[API Error][2022-10-21T15:18:21.310Z][#400]: {"type":"error","status":400,"message":"Bad Request"}
+[API Error][2022-10-21T15:22:18.132Z][#500]: {"type":"error","status":500,"message":"Image to composite must have same dimensions or smaller"}
+[API Error][2022-10-21T15:23:49.194Z][#500]: {"type":"error","status":500,"message":"Invalid value \"undefined\" for header \"Content-Length\""}
+[API Error][2022-10-21T15:57:39.263Z][#500]: {"type":"error","status":500,"message":"Cannot read properties of undefined (reading 'data')"}
+[API Error][2022-10-21T16:00:22.593Z][#500]: {"type":"error","status":500,"message":"Cannot read properties of undefined (reading 'data')"}
+[API Error][2022-10-21T16:00:49.125Z][#500]: {"type":"error","status":500,"message":"Cannot read properties of undefined (reading 'data')"}
+[API Error][2022-10-21T16:03:04.077Z][#500]: {"type":"error","status":500,"message":"Response code 404 (NOT FOUND)"}
+[API Error][2022-10-21T16:14:25.592Z][#500]: {"type":"error","status":500,"message":"Cannot set headers after they are sent to the client"}
+[API Error][2022-10-21T16:15:34.682Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 400"}
+[API Error][2022-10-21T16:19:17.111Z][#500]: {"type":"error","status":500,"message":"Input file is missing: https://openailabsprodscus.blob.core.windows.net/private/user-ZGEIMWTHLWDBydSiSXA8LtBd/generations/generation-6iKe9ODgajcWiz81v3VwvxqG/image.webp?st=2022-10-21T15%3A20%3A30Z&se=2022-10-21T17%3A18%3A30Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/webp&skoid=15f0b47b-a152-4599-9e98-9cb4a58269f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-10-21T14%3A04%3A06Z&ske=2022-10-28T14%3A04%3A06Z&sks=b&skv=2021-08-06&sig=ng%2BCuBm95pwpvXZESJmiDY9S3fstQrpgj88azyzhbB8%3D"}
+[API Error][2022-10-21T16:19:44.006Z][#500]: {"type":"error","status":500,"message":"Input file is missing: https://openailabsprodscus.blob.core.windows.net/private/user-ZGEIMWTHLWDBydSiSXA8LtBd/generations/generation-srfiw80luhL5HveuG85dCc8x/image.webp?st=2022-10-21T15%3A20%3A57Z&se=2022-10-21T17%3A18%3A57Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/webp&skoid=15f0b47b-a152-4599-9e98-9cb4a58269f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-10-21T16%3A11%3A15Z&ske=2022-10-28T16%3A11%3A15Z&sks=b&skv=2021-08-06&sig=WqZA%2BViRwupkLYgiAguSZJXYq0SV1dd6hcLvR0HnPxM%3D"}
+[API Error][2022-10-21T18:48:09.250Z][#500]: {"type":"error","status":500,"message":"extract_area: bad extract area\n"}
+[API Error][2022-10-21T18:58:08.714Z][#500]: {"type":"error","status":500,"message":"VipsImage: memory area too small --- should be 1440 bytes, you passed 813\n"}
+[API Error][2022-10-21T18:58:53.660Z][#500]: {"type":"error","status":500,"message":"VipsImage: memory area too small --- should be 1440 bytes, you passed 218\n"}
+[API Error][2022-10-21T19:13:30.135Z][#500]: {"type":"error","status":500,"message":"Invalid value \"undefined\" for header \"Content-Length\""}
+[API Error][2022-10-21T19:18:24.328Z][#500]: {"type":"error","status":500,"message":"Expected integer for left but received 0 of type string"}
+[API Error][2022-10-21T19:48:54.375Z][#500]: {"type":"error","status":500,"message":"Expected both left and top to be set"}
+[API Error][2022-10-21T19:52:54.816Z][#500]: {"type":"error","status":500,"message":"Expected both left and top to be set"}
+[API Error][2022-10-21T19:57:47.073Z][#500]: {"type":"error","status":500,"message":"i is not defined"}
+[API Error][2022-10-21T20:01:43.621Z][#500]: {"type":"error","status":500,"message":"Expected both left and top to be set"}
+[API Error][2022-10-21T20:09:51.922Z][#500]: {"type":"error","status":500,"message":"image4 is not defined"}
+[API Error][2022-10-21T20:11:30.295Z][#500]: {"type":"error","status":500,"message":"Expected integer for top but received undefined of type undefined"}
+[API Error][2022-10-21T20:12:26.376Z][#500]: {"type":"error","status":500,"message":"Expected integer for top but received undefined of type undefined"}
+[API Error][2022-10-21T20:13:54.323Z][#500]: {"type":"error","status":500,"message":"extract_area: bad extract area\n"}
+[API Error][2022-10-21T20:15:04.038Z][#500]: {"type":"error","status":500,"message":"extract_area: bad extract area\n"}
+[API Error][2022-10-21T20:15:48.316Z][#500]: {"type":"error","status":500,"message":"extract_area: bad extract area\n"}
+[API Error][2022-10-24T12:44:31.156Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2022-10-24T12:50:00.289Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2022-10-24T13:13:49.934Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2022-10-24T13:13:54.005Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2022-10-24T13:15:46.251Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2022-10-24T13:16:02.716Z][#401]: {"type":"error","status":401,"message":"Password does not match! Enter correct password"}
+[API Error][2022-10-24T13:16:25.347Z][#401]: {"type":"error","status":401,"message":"Password does not match! Enter correct password"}
+[API Error][2022-10-24T13:16:32.989Z][#401]: {"type":"error","status":401,"message":"No user exist with this email address."}
