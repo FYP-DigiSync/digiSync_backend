@@ -86,3 +86,43 @@
 [API Error][2022-10-24T13:16:02.716Z][#401]: {"type":"error","status":401,"message":"Password does not match! Enter correct password"}
 [API Error][2022-10-24T13:16:25.347Z][#401]: {"type":"error","status":401,"message":"Password does not match! Enter correct password"}
 [API Error][2022-10-24T13:16:32.989Z][#401]: {"type":"error","status":401,"message":"No user exist with this email address."}
+[API Error][2022-10-24T17:14:36.107Z][#500]: {"type":"error","status":500,"message":"Assignment to constant variable."}
+[API Error][2022-10-24T17:14:56.429Z][#500]: {"type":"error","status":500,"message":"Image to composite must have same dimensions or smaller"}
+[API Error][2022-10-24T17:30:49.935Z][#500]: {"type":"error","status":500,"message":"Image to composite must have same dimensions or smaller"}
+[API Error][2022-10-24T17:35:51.270Z][#500]: {"type":"error","status":500,"message":"extract_area: bad extract area\n"}
+[API Error][2022-10-24T17:36:34.004Z][#500]: {"type":"error","status":500,"message":"Assignment to constant variable."}
+[API Error][2022-10-24T18:24:43.660Z][#500]: {"type":"error","status":500,"message":"Cannot read properties of undefined (reading '_id')"}
+[API Error][2022-10-25T05:21:39.811Z][#500]: {"type":"error","status":500,"message":"counter is not defined"}
+[API Error][2022-10-25T05:22:07.109Z][#500]: {"type":"error","status":500,"message":"Cannot read properties of undefined (reading 'options')"}
+[API Error][2022-10-25T05:22:53.770Z][#500]: {"type":"error","status":500,"message":"Cannot read properties of undefined (reading 'options')"}
+[API Error][2022-10-25T05:31:40.171Z][#500]: {"type":"error","status":500,"message":"Cannot read properties of undefined (reading 'options')"}
+[API Error][2022-10-25T05:45:07.016Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2022-10-25T05:53:57.501Z][#500]: {"type":"error","status":500,"message":"Cannot read properties of undefined (reading 'push')"}
+[API Error][2022-10-25T05:55:23.777Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2022-10-25T05:56:55.266Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2022-10-25T05:57:11.641Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2022-10-25T05:57:25.679Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2022-10-25T05:57:48.626Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2022-10-25T06:20:32.381Z][#401]: {"type":"error","status":401,"message":"Password does not match! Enter correct password"}
+[API Error][2022-10-25T06:20:38.985Z][#401]: {"type":"error","status":401,"message":"Password does not match! Enter correct password"}
+[API Error][2022-10-25T07:16:43.884Z][#400]: {"type":"error","status":400,"message":"Prompt is required"}
+[API Error][2022-10-25T07:17:09.097Z][#400]: {"type":"error","status":400,"message":"Prompt is required"}
+[API Error][2022-10-25T07:17:42.139Z][#500]: {"type":"error","status":500,"message":"Converting circular structure to JSON\n    --> starting at object with constructor 'ClientRequest'\n    |     property 'socket' -> object with constructor 'Socket'\n    --- property '_httpMessage' closes the circle"}
+[API Error][2022-10-25T07:21:37.964Z][#500]: {"type":"error","status":500,"message":"read ECONNRESET"}
+[API Error][2022-10-25T07:23:20.047Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 500"}
+[API Error][2022-10-25T07:23:30.720Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 500"}
+[API Error][2022-10-25T07:23:45.830Z][#500]: {"type":"error","status":500,"message":"data is not defined"}
+[API Error][2022-10-25T07:24:17.563Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 500"}
+[API Error][2022-10-25T07:27:35.349Z][#500]: {"type":"error","status":500,"message":"Converting circular structure to JSON\n    --> starting at object with constructor 'ClientRequest'\n    |     property 'socket' -> object with constructor 'Socket'\n    --- property '_httpMessage' closes the circle"}
+[API Error][2022-10-25T08:36:23.657Z][#500]: {"type":"error","status":500,"message":"connect ECONNREFUSED 127.0.0.1:8080"}
+[API Error][2022-10-25T08:38:09.818Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 500"}
+[API Error][2022-10-25T08:38:11.494Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 500"}
+[API Error][2022-10-25T08:42:44.238Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 500"}
+[API Error][2022-10-25T09:00:15.483Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 500"}
+[API Error][2022-10-25T09:00:16.820Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 500"}
+[API Error][2022-10-25T09:02:31.530Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 500"}
+[API Error][2022-10-25T09:03:43.963Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 500"}
+[API Error][2022-10-25T09:10:48.964Z][#401]: {"type":"error","status":401,"message":"No user exist with this email address."}
+[API Error][2022-10-25T09:11:03.670Z][#401]: {"type":"error","status":401,"message":"Password does not match! Enter correct password"}
+[API Error][2022-10-25T09:11:08.028Z][#401]: {"type":"error","status":401,"message":"Password does not match! Enter correct password"}
+[API Error][2022-10-25T09:11:19.707Z][#401]: {"type":"error","status":401,"message":"Password does not match! Enter correct password"}

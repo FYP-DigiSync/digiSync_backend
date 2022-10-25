@@ -34,6 +34,10 @@ app.options("*", cors());
 app.use(`/${api_name}/api/v${api_version}/user`, userRoute);
 app.use(`/${api_name}/api/v${api_version}/post`, postRoute);
 
+// make upload folder static
+app.use(`/${api_name}/api/v${api_version}/Uploads`, express.static('Uploads'));
+
+
 // Generic API Information Endpoint
 app.use('/info', (req, res, next) => {
   res.status(200).json({

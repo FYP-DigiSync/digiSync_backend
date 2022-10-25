@@ -1,5 +1,6 @@
 
 const average = require('image-average-color');
+const sharp= require('sharp');
 
 const promisefyCallback = (image) => {
     return new Promise((resolve, reject) => {
@@ -12,4 +13,14 @@ const promisefyCallback = (image) => {
         });
     });
 }
-module.exports = promisefyCallback;
+const saveImageToFile = (image,path) => {
+    return new Promise((resolve, reject) => {
+        sharp(image).toFile(`./Uploads/${path}.png`).then((data) => {
+            resolve(data);
+        }).catch((err) => {
+            reject(err);
+        });
+    });
+}
+
+module.exports = {promisefyCallback,saveImageToFile};

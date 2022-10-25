@@ -2,9 +2,8 @@ const Dalle = require("../Utils/dalle2");
 const errorHandler = require("../Utils/errorHandler");
 const sharp = require('sharp');
 const axios = require("axios");
-const promisefyCallback = require("../Utils/promisfyCallback");
-
-// APIkey==  NdySQeb7wpfUvEUw6ne255PC
+const { promisefyCallback, saveImageToFile } = require("../Utils/promisfyCallback");
+const imageModel = require("../Models/graphicModel");
 
 class postController {
 
@@ -19,93 +18,64 @@ class postController {
             return next(new errorHandler(400, "Error generation graphics"));
         }
         const res1 = generations.generations.data;
-        let res2 = [];
+        let res2 = {
+            prompt: prompt,
+            generation:[]
+        };
+        for (let i = 0; i < res1.length; i++) {
+            const response = await axios.get(res1[i].generation.image_path, {
+                responseType: "arraybuffer",
+            });
+            const image1 = await sharp(Buffer.from(response.data, "binary")).png().toBuffer();
+            let image2 = await sharp(image1).resize(440, 440).png().toBuffer();
+            let image3 = await sharp(image2).extract({ left: 0, top: 0, width: 5, height: 440 }).png().toBuffer();
+            const averageColor = await promisefyCallback(image3);
+            let length = 5;
+            for (let i = 0; i < 7; i++) {
+                let image5 = await sharp(image3).extend({ top: 0, bottom: 0, left: length, right: 0, background: "red" }).png().toBuffer();
+                image3 = await sharp(image5).composite([{ input: image3, top: 0, left: 0 }]).png().toBuffer();
+                length += length;
+            }
+            image2 = await sharp(image2).extend({ top: 0, bottom: 0, left: 640, right: 0, background: "red" }).png().toBuffer();
+            image2 = await sharp(image2).composite([{ input: image3, top: 0, left: 0 }]).png().toBuffer();
+            let image4 = await sharp(image2).extract({ left: 0, top: 435, width: 1080, height: 5 }).png().toBuffer();
+            length = 5;
+            for (let i = 0; i < 7; i++) {
+                let image6 = await sharp(image4).extend({ top: 0, bottom: length, left: 0, right: 0, background: "red" }).png().toBuffer();
+                image4 = await sharp(image6).composite([{ input: image4, left: 0, top: length }]).png().toBuffer();
+                length += length;
+            }
+            image2 = await sharp(image2).extend({ top: 0, bottom: 640, left: 0, right: 0, background: "red" }).png().toBuffer();
+            image2 = await sharp(image2).composite([{ input: image4, left: 0, top: 440 }]).png().toBuffer();
 
-        const response = await axios.get(res1[1].generation.image_path, {
-            responseType: "arraybuffer",
-        });
-
-        // remove the background
-        const image1 = await sharp(Buffer.from(response.data, "binary")).png().toBuffer();
-
-        // resize the image
-        let image2 = await sharp(image1).resize(500, 500).png().toBuffer();
-
-        // crop the left side of the image
-        const image3 = await sharp(image2).extract({ left: 0, top: 0, width: 5, height: 360 }).png().toBuffer();
-
-
-
-        // increase the width by adding image3 to the right side of image2 repeatedly until the width is 1080
-        for (let i = 0; i < 144; i++) {
-            image2 = await sharp(image2).extend({ top: 0, bottom: 0, left: 5, right: 0, background: "red"}).png().toBuffer();
-            image2 = await sharp(image2).composite([{ input: image3, top:0, left:0 }]).png().toBuffer();
+            let uploadId = `${Math.random().toString(36)}${Math.random().toString(36)}`;
+            const saveImg = await saveImageToFile(image2, uploadId);
+            if (!saveImg) {
+                return next(new errorHandler(400, "Error saving image", res));
+            }
+            res2.generation.push({
+                "image_path": `http://localhost:4000/digsync/api/v0.1/uploads/${uploadId}.png`,
+                bgcolor:averageColor
+            });
         }
-
-        // crop the bottom 5 pixels of the image
-        const image4 = await sharp(image2).extract({ left: 0, top: 355, width: 1080, height: 5 }).png().toBuffer();
-
+        res.status(200).json(res2);
+    }
 
 
-        // // increase the width by adding image4 to the bottom side of image2 repeatedly until the height is 1080
-        for (let i = 0; i < 144; i++) {
-            image2 = await sharp(image2).extend({ top: 0, bottom: 5, left: 0, right: 0, background: "red" }).png().toBuffer();
-            image2 = await sharp(image2).composite([{ input: image4, left: 0, top:360+i*5 }]).png().toBuffer();
+    getPosterContent= async(req,res, next)=>{
+        // http://localhost:8080/
+        const { prompt } = req.body;
+        if (!prompt) {
+            return next(new errorHandler(400, "Prompt is required"));
         }
-
-
-        // get the image width and height
-        // let { width, height } = await sharp(image2).metadata();
-
-
-        // while(width<1080){
-        //     // apend image3 to left side of image2
-        //     image2 = await sharp(image2).joinChannel(image3, {
-        //         raw: {
-        //             width: 1,
-        //             height: 360,
-        //             channels: 4,
-        //         },
-        //     }).png().toBuffer();
-
-        //     // get the image width and height
-        //     const data = await sharp(image2).metadata();
-        //     width = data.width;
-        // }
-
-
-
-        // // send as image 
-        res.writeHead(200, {
-            'Content-Type': 'image/png',
-            'Content-Length': image2.length
-        });
-        res.end(image2);
-
-
-
-
-
-        // for (let i = 0; i < res1.length; i++) {
-        //     const response = await axios.get(res1[i].generation.image_path, {
-        //         responseType: "arraybuffer",
-        //     });
-        //     const base64 = Buffer.from(response.data, "binary").toString("base64");
-
-        //     // crop the image from the top corner 
-        //     const image  = await sharp(Buffer.from(base64, "base64")).png().toBuffer();
-        //     const croppedImage = await sharp(image).extract({ left: 0, top: 0, width: 1, height: 1 }).png().toBuffer();
-        //     // get the average color
-        //     const averageColor = await promisefyCallback(croppedImage);
-        //     console.log(averageColor);
-        //     res2.push({
-        //         imageurl:res1[i].generation.image_path,
-        //         bgcolor:averageColor,
-        //     });
-        // }
-        // res.status(200).json({ prompt, data: generations });
-        // res.status(200).json({ prompt, data: res1 });
-
+        console.log(prompt);
+        // sent a post request to the server
+        const response = await axios.post("http://localhost:8080/", {prefix: prompt, temperature:0.7, batch_size:10});
+        console.log(response);
+        if(!response || !response.data){
+            return next(new errorHandler(400, "Error getting poster content", response));
+        }
+        res.status(200).json(response.data);
     }
 }
 
