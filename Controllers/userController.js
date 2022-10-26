@@ -32,8 +32,8 @@ class userController{
 
     // get a user with the given id
     decodetoken = async(req, res, next) => {
-        const { firstName,lastName, country, email, phoneNumber  } =req.thisuser;
-        return res.status(200).json({firstName,lastName, country, email, phoneNumber});
+        const { firstName,lastName, email  } =req.thisuser;
+        return res.status(200).json({firstName,lastName, email});
     }
 
 

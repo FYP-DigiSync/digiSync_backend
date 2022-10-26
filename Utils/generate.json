@@ -1,0 +1,21 @@
+{
+    "type": "error",
+    "status": "pending",
+    "message": "Error generation graphics",
+    "object": "task",
+    "id": "task-sPfKtQe0JQawahUMYK1vt6dK",
+    "created": 1666761994,
+    "task_type": "text2im",
+    "status_information": {},
+    "prompt_id": "prompt-SBc5RDJ1CEBOXoTuareMgCHL",
+    "prompt": {
+      "id": "prompt-SBc5RDJ1CEBOXoTuareMgCHL",
+      "object": "prompt",
+      "created": 1666761994,
+      "prompt_type": "CaptionPrompt",
+      "prompt": {
+        "caption": "A rebot with a computer having table infront in a sky blue background, artistic"
+      },
+      "parent_generation_id": null
+    }
+  }
