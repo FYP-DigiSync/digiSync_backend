@@ -10,10 +10,11 @@ class postController {
 
     generateGraphics = async (req, res, next) => {
         const { prompt } = req.body;
+        console.log(prompt);
         if (!prompt) {
             return next(new errorHandler(400, "Prompt is required"));
         }
-        const dalle = new Dalle("sess-k5VnW7R8nDpVEwxU1ci4mNg6Pmhxn2altxB9Ae9S");
+        const dalle = new Dalle("sess-laLTIUdvC3qUwsRnryRGUMiBansJ9rr4HNWGhlv7");
         const generations = await dalle.generate(prompt);
         if (!generations?.generations?.data) {
             return next(new errorHandler(400, "Error generation graphics",generations ));
