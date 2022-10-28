@@ -101,7 +101,8 @@ class postController {
             return next(new errorHandler(400, "Input validation error", errors));
         }
         console.log(req.body);
-        const {prefix, temperature, batch_size}= req.body;
+        let {prefix, temperature, batch_size}= req.body;
+        batch_size=5;
         // sent a post request to the server
         let response = await axios.post("http://localhost:8080/", {prefix, temperature, batch_size});
         if(!response || !response.data || !response.data.text){
