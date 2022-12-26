@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const mongoose = require('mongoose');
+const express_fileupload=require('express-fileupload')
 const errorHandler= require('./Utils/errorHandler');
 const errorMiddleware= require('./Middleware/errorMiddleware')
 
@@ -29,7 +30,7 @@ app.use(express.json());
 app.use(cors());
 app.options("*", cors());
 
-
+app.use(express_fileupload())
 
 // API Application Routes
 app.use(`/${api_name}/api/v${api_version}/user`, userRoute);

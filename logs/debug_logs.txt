@@ -274,3 +274,36 @@
 [API Error][2022-12-26T16:50:45.031Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
 [API Error][2022-12-26T16:52:35.723Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
 [API Error][2022-12-26T16:52:57.419Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2022-12-26T19:09:18.579Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"msg":"token is required","param":"token","location":"body"}]}
+[API Error][2022-12-26T19:09:41.841Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"msg":"picture is required","param":"picture","location":"body"}]}
+[API Error][2022-12-26T19:09:51.954Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"msg":"picture is required","param":"picture","location":"body"}]}
+[API Error][2022-12-26T19:10:09.083Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 400"}
+[API Error][2022-12-26T19:11:23.137Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 400"}
+[API Error][2022-12-26T19:56:37.564Z][#500]: {"type":"error","status":500,"message":"DB is not defined"}
+[API Error][2022-12-26T20:10:05.618Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"msg":"picture is required","param":"picture","location":"body"}]}
+[API Error][2022-12-26T20:11:00.174Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"msg":"picture is required","param":"picture","location":"body"}]}
+[API Error][2022-12-26T20:11:17.304Z][#500]: {"type":"error","status":500,"message":"Cannot read properties of undefined (reading 'file')"}
+[API Error][2022-12-26T20:11:28.658Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"msg":"picture is required","param":"picture","location":"body"}]}
+[API Error][2022-12-26T20:14:03.946Z][#500]: {"type":"error","status":500,"message":"Cannot read properties of undefined (reading 'file')"}
+[API Error][2022-12-26T20:15:23.099Z][#500]: {"type":"error","status":500,"message":"Cannot read properties of undefined (reading 'picture')"}
+[API Error][2022-12-26T20:16:41.457Z][#500]: {"type":"error","status":500,"message":"Cannot read properties of undefined (reading 'picture')"}
+[API Error][2022-12-26T20:24:11.421Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 400"}
+[API Error][2022-12-26T20:24:23.771Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 400"}
+[API Error][2022-12-26T20:33:16.786Z][#500]: {"type":"error","status":500,"message":"id is not defined"}
+[API Error][2022-12-26T20:33:50.963Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 400"}
+[API Error][2022-12-26T20:52:56.457Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2022-12-26T20:55:26.942Z][#500]: {"type":"error","status":500,"message":"Cannot read properties of undefined (reading 'split')"}
+[API Error][2022-12-26T20:56:54.594Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 400"}
+[API Error][2022-12-26T20:57:38.753Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2022-12-26T20:57:44.225Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2022-12-26T20:58:59.097Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 400"}
+[API Error][2022-12-26T21:00:14.670Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 400"}
+[API Error][2022-12-26T21:14:27.746Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 400"}
+[API Error][2022-12-26T21:33:25.954Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2022-12-26T21:43:43.123Z][#500]: {"type":"error","status":500,"message":"fs is not defined"}
+[API Error][2022-12-26T21:44:21.711Z][#500]: {"type":"error","status":500,"message":"The \"path\" argument must be of type string or an instance of Buffer or URL. Received an instance of Object"}
+[API Error][2022-12-26T21:51:19.796Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 400"}
+[API Error][2022-12-26T21:52:09.783Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 400"}
+[API Error][2022-12-26T21:52:50.848Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 400"}
+[API Error][2022-12-26T21:54:24.931Z][#500]: {"type":"error","status":500,"message":"id is not defined"}
+[API Error][2022-12-26T21:55:29.048Z][#500]: {"type":"error","status":500,"message":"The \"path\" argument must be of type string or an instance of Buffer or URL. Received an instance of Object"}
