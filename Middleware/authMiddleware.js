@@ -5,6 +5,7 @@ const {verifyJWT}= require('../utils/token');
 const auth= (...roles)=>{
     return async(req,res,next)=>{
         try{
+            console.log("hello digisync");
             const authHeader = req.headers.authorization;
             const bearer= 'Bearer ';
             if(!authHeader || !authHeader.startsWith(bearer)){
