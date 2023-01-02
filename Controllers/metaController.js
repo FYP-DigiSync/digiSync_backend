@@ -375,6 +375,20 @@ class metaController {
         return res.status(201).json((results.data));
 
     }
+    getCredential= async (req, res, next) => {
+        const err = validationResult(req);
+        if (!err.isEmpty()) {
+            return next(new errorHandler(400, "Input validation failed", err));
+        }
+        const id = await metaModel.findOne({ user: req.thisuser })
+        if (!id) {
+            return res.status(201).json("not-exist");
+        }
+        else{
+            
+            return res.status(201).json("already-exist");
+        }
+    }
 }
 
 
