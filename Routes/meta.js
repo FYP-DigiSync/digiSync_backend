@@ -12,6 +12,7 @@ router.post('/schedulePostOnFB', auth()/*, postSchema*/, asyncWrapper(metaContro
 router.post('/postOnInsta', auth()/*, postSchema*/, asyncWrapper(metaController.postOnInsta));
 router.get('/getInstaInsights', auth()/*, postSchema*/, asyncWrapper(metaController.instaInsights));
 router.get('/getFBInsights', auth()/*, postSchema*/, asyncWrapper(metaController.fbInsights));
+router.get('/getCredential', auth()/*, postSchema*/, asyncWrapper(metaController.getCredential));
 
 
 module.exports = router;
