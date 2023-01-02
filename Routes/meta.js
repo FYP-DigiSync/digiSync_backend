@@ -8,6 +8,10 @@ const auth = require('../Middleware/authMiddleware');
 
 router.post('/addCredential', auth(), addCredentialSchema, asyncWrapper(metaController.addCredential));
 router.post('/postOnFB', auth()/*, postSchema*/, asyncWrapper(metaController.postOnFB));
+router.post('/schedulePostOnFB', auth()/*, postSchema*/, asyncWrapper(metaController.schedulePostOnFB));
+router.post('/postOnInsta', auth()/*, postSchema*/, asyncWrapper(metaController.postOnInsta));
+router.get('/getInstaInsights', auth()/*, postSchema*/, asyncWrapper(metaController.instaInsights));
+router.get('/getFBInsights', auth()/*, postSchema*/, asyncWrapper(metaController.fbInsights));
 
 
 module.exports = router;

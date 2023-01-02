@@ -1,12 +1,18 @@
 
 const { validationResult } = require('express-validator');
-// const {generateSimpleJWT}= require('../Utils/token');
 const errorHandler = require('../Utils/errorHandler');
 const fs = require('fs');
 const metaModel = require('../Models/metaCredentialModel');
 const axios = require('axios');
 const FB = require('fb');
+const { Storage } = require('@google-cloud/storage');
+const fbPostModel = require('../Models/fbPost');
+const instaPostModel = require('../Models/instaPost');
 
+const storage = new Storage({
+    keyFilename: './Utils/digisync-c9aa1-firebase-adminsdk-qn02h-0045992fcb.json',
+});
+const bucketName = process.env.FIREBASE_BUCKET;
 class metaController {
 
     // create a user 
@@ -79,7 +85,7 @@ class metaController {
         if (!req.body.message) {
             return next(new errorHandler(400, "message not found", err));
         }
-        
+
         const file = req.files.picture;
         const uploadId = `${Math.random().toString(36)}${Math.random().toString(36)}`;
         const path = `./Uploads/${uploadId}.${file.name.split(".")[1]}`;
@@ -93,16 +99,280 @@ class metaController {
         if (!id) {
             return next(new errorHandler(404, "user not found in db", err));
         }
-        
         FB.setAccessToken(id.page_access_token);
-        await FB.api('me/photos', 'post', { source: fs.createReadStream(path), caption: req.body.message }, function (res) {
-            if(!res || res.error) {
-              console.log(!res ? 'error occurred' : res.error);
-              return;
+        await FB.api('me/photos', 'post', {
+            source: fs.createReadStream(path), caption: req.body.message
+        }, function (res1) {
+            if (!res1 || res1.error) {
+                console.log(!res1 ? 'error occurred' : res1.error);
+                return;
             }
-            console.log('Post Id: ' + res.post_id);
-          });
-        return res.status(201).json("success");
+            console.log('Post Id: ' + res1.post_id);
+            const create = new fbPostModel({
+                user: req.thisuser,
+                caption: req.body.message,
+                posterRoute: path,
+                postID: res1.post_id
+            })
+            create.save()
+            return res.status(201).json("success");
+        });
+
+    }
+    schedulePostOnFB = async (req, res, next) => {
+        const err = validationResult(req);
+        if (!err.isEmpty()) {
+            return next(new errorHandler(400, "Input validation failed", err));
+        }
+        if (!req.files.picture) {
+            return next(new errorHandler(400, "picture not found", err));
+        }
+        if (!req.body.message) {
+            return next(new errorHandler(400, "message not found", err));
+        }
+        if (!req.body.time) {
+            return next(new errorHandler(400, "time not found", err));
+        }
+
+        const file = req.files.picture;
+        const uploadId = `${Math.random().toString(36)}${Math.random().toString(36)}`;
+        const path1 = `${uploadId}.${file.name.split(".")[1]}`;
+        const path = `./Uploads/${path1}`;
+        await file.mv(path, (err) => {
+            if (err) {
+                return next(new errorHandler(400, "Error saving file", err));
+            }
+        })
+
+        const generationMatchPrecondition = 0
+        const options = {
+            destination: path1,
+
+            preconditionOpts: { ifGenerationMatch: generationMatchPrecondition },
+        };
+
+        const x = await storage.bucket(bucketName).upload(path, options);
+        
+
+        const url = `https://firebasestorage.googleapis.com/v0/b/${bucketName}/o/${path1}?alt=media`
+        
+        
+        const id = await metaModel.findOne({ user: req.thisuser })
+        if (!id) {
+            return next(new errorHandler(404, "user not found in db", err));
+        }
+        let url1 = `https://graph.facebook.com/${id.page_id}/photos?published=false&url=${url}&message=${req.body.message}&scheduled_publish_time=${req.body.time}&access_token=${id.page_access_token}`
+        
+        let config = {
+            method: 'post',
+            url: url1,
+            headers: {}
+        };
+
+        const results = await axios(config)
+        if (!results || !results.data || !results.data.id) {
+            return next(new errorHandler(404, "post could not created", err));
+        }
+
+        const create = new instaPostModel({
+            user: req.thisuser,
+            caption: req.body.message,
+            posterRoute: path,
+            postID: results.data.id
+        })
+        create.save()
+        return res.status(201).json('success');
+
+    }
+    
+    postOnInsta = async (req, res, next) => {
+        const err = validationResult(req);
+        if (!err.isEmpty()) {
+            return next(new errorHandler(400, "Input validation failed", err));
+        }
+        if (!req.files.picture) {
+            return next(new errorHandler(400, "picture not found", err));
+        }
+        if (!req.body.message) {
+            return next(new errorHandler(400, "message not found", err));
+        }
+
+        const file = req.files.picture;
+        const uploadId = `${Math.random().toString(36)}${Math.random().toString(36)}`;
+        const path1 = `${uploadId}.${file.name.split(".")[1]}`;
+        const path = `./Uploads/${path1}`;
+        await file.mv(path, (err) => {
+            if (err) {
+                return next(new errorHandler(400, "Error saving file", err));
+            }
+        })
+
+        const generationMatchPrecondition = 0
+        const options = {
+            destination: path1,
+
+            preconditionOpts: { ifGenerationMatch: generationMatchPrecondition },
+        };
+
+        const x = await storage.bucket(bucketName).upload(path, options);
+        // await uploadFile()
+        // console.log(x);
+
+        const url = `https://firebasestorage.googleapis.com/v0/b/digisync-c9aa1.appspot.com/o/${path1}?alt=media`
+
+
+        const id = await metaModel.findOne({ user: req.thisuser })
+        if (!id) {
+            return next(new errorHandler(404, "user not found in db", err));
+        }
+        let url1 = `https://graph.facebook.com/v15.0/${id.instagram_id}/media?image_url=${url}&caption=${req.body.message}&access_token=${id.page_access_token}`
+        // console.log(url1);
+        let config = {
+            method: 'post',
+            url: url1,
+            headers: {}
+        };
+
+        const results = await axios(config)
+        if (!results || !results.data || !results.data.id) {
+            return next(new errorHandler(404, "post could not created", err));
+        }
+
+        // console.log(results.data.id)
+        config = {
+            method: 'post',
+            url: `https://graph.facebook.com/v15.0/${id.instagram_id}/media_publish?creation_id=${results.data.id}&access_token=${id.page_access_token}`,
+            headers: {}
+        };
+
+
+        const results1 = await axios(config)
+        if (!results1 || !results1.data || !results1.data.id) {
+            return next(new errorHandler(404, "post could not created", err));
+        }
+        const create = new instaPostModel({
+            user: req.thisuser,
+            caption: req.body.message,
+            posterRoute: path,
+            postID: results1.data.id
+        })
+        create.save()
+        return res.status(201).json('success');
+
+    }
+    schedulePostOnInsta = async (req, res, next) => {
+        const err = validationResult(req);
+        if (!err.isEmpty()) {
+            return next(new errorHandler(400, "Input validation failed", err));
+        }
+        if (!req.files.picture) {
+            return next(new errorHandler(400, "picture not found", err));
+        }
+        if (!req.body.message) {
+            return next(new errorHandler(400, "message not found", err));
+        }
+
+        const file = req.files.picture;
+        const uploadId = `${Math.random().toString(36)}${Math.random().toString(36)}`;
+        const path1 = `${uploadId}.${file.name.split(".")[1]}`;
+        const path = `./Uploads/${path1}`;
+        await file.mv(path, (err) => {
+            if (err) {
+                return next(new errorHandler(400, "Error saving file", err));
+            }
+        })
+
+        const generationMatchPrecondition = 0
+        const options = {
+            destination: path1,
+
+            preconditionOpts: { ifGenerationMatch: generationMatchPrecondition },
+        };
+
+        const x = await storage.bucket(bucketName).upload(path, options);
+        // await uploadFile()
+        // console.log(x);
+
+        const url = `https://firebasestorage.googleapis.com/v0/b/digisync-c9aa1.appspot.com/o/${path1}?alt=media`
+
+
+        const id = await metaModel.findOne({ user: req.thisuser })
+        if (!id) {
+            return next(new errorHandler(404, "user not found in db", err));
+        }
+        let url1 = `https://graph.facebook.com/v15.0/${id.instagram_id}/media?image_url=${url}&caption=${req.body.message}&access_token=${id.page_access_token}`
+        // console.log(url1);
+        let config = {
+            method: 'post',
+            url: url1,
+            headers: {}
+        };
+
+        const results = await axios(config)
+        if (!results || !results.data || !results.data.id) {
+            return next(new errorHandler(404, "post could not created", err));
+        }
+
+        // console.log(results.data.id)
+        config = {
+            method: 'post',
+            url: `https://graph.facebook.com/v15.0/${id.instagram_id}/media_publish?creation_id=${results.data.id}&access_token=${id.page_access_token}`,
+            headers: {}
+        };
+
+
+        const results1 = await axios(config)
+        if (!results1 || !results1.data || !results1.data.id) {
+            return next(new errorHandler(404, "post could not created", err));
+        }
+        const create = new instaPostModel({
+            user: req.thisuser,
+            caption: req.body.message,
+            posterRoute: path,
+            postID: results1.data.id
+        })
+        create.save()
+        return res.status(201).json('success');
+
+    }
+    instaInsights = async (req, res, next) => {
+        const err = validationResult(req);
+        if (!err.isEmpty()) {
+            return next(new errorHandler(400, "Input validation failed", err));
+        }
+        const id = await metaModel.findOne({ user: req.thisuser })
+        if (!id) {
+            return next(new errorHandler(404, "user not found in db", err));
+        }
+        let config = {
+            method: 'get',
+            url: `https://graph.facebook.com/${id.instagram_id}/insights?metric=impressions,reach,profile_views&period=day&access_token=${id.page_access_token}`,
+            headers: {}
+        };
+
+        const results = await axios(config)
+        // console.log(results.data)
+        return res.status(201).json((results.data));
+
+    }
+    fbInsights = async (req, res, next) => {
+        const err = validationResult(req);
+        if (!err.isEmpty()) {
+            return next(new errorHandler(400, "Input validation failed", err));
+        }
+        const id = await metaModel.findOne({ user: req.thisuser })
+        if (!id) {
+            return next(new errorHandler(404, "user not found in db", err));
+        }
+        let config = {
+            method: 'get',
+            url: `https://graph.facebook.com/${id.page_id}/insights/page_impressions_unique?access_token=${id.page_access_token}`,
+            headers: {}
+        };
+
+        const results = await axios(config)
+        // console.log(results.data)
+        return res.status(201).json((results.data));
 
     }
 }
