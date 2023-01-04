@@ -15,28 +15,28 @@ class Dalle {
   }
 
   async generate(prompt) {
-    let task = await got.post(`${this.url}/tasks`, {
-      json: {
-        task_type: "text2im",
-        prompt: {
-          caption: prompt,
-          batch_size: 4,
-        },
-      },
-      headers: {
-        Authorization: `Bearer ${this.bearerToken}`
-      }
-    }).json();
-    task = await this.getTask(task.id);
-    while(task.status !== "succeeded"){
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      task = await this.getTask(task.id);
-    }
-    // console.log(prompt);
-    // let task= {
-    //   id:"task-a1uBte4BETmj9Lc67T9KuEjq"
+    // let task = await got.post(`${this.url}/tasks`, {
+    //   json: {
+    //     task_type: "text2im",
+    //     prompt: {
+    //       caption: prompt,
+    //       batch_size: 4,
+    //     },
+    //   },
+    //   headers: {
+    //     Authorization: `Bearer ${this.bearerToken}`
+    //   }
+    // }).json();
+    // task = await this.getTask(task.id);
+    // while(task.status !== "succeeded"){
+    //   await new Promise(resolve => setTimeout(resolve, 2000));
+    //   task = await this.getTask(task.id);
     // }
-    // task= await this.getTask(task.id);
+    // console.log(prompt);
+    let task= {
+      id:"task-4yPRdHXHSiYcTHy34bessqET"
+    }
+    task= await this.getTask(task.id);
     return task;
   }
 
