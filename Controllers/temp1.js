@@ -1,4 +1,4 @@
-const useFetch = async () => {
+const getMidJourneyImage = async (prompt) => {
     const request = await fetch("https://discord.com/api/v9/interactions", {
         "headers": {
             "accept": "*/*",
@@ -20,11 +20,13 @@ const useFetch = async () => {
             "Referer": "https://discord.com/channels/662267976984297473/1008571063732539392",
             "Referrer-Policy": "strict-origin-when-cross-origin"
         },
-        "body": "------WebKitFormBoundaryHzDLGhlryAjGBUT1\r\nContent-Disposition: form-data; name=\"payload_json\"\r\n\r\n{\"type\":2,\"application_id\":\"936929561302675456\",\"guild_id\":\"662267976984297473\",\"channel_id\":\"1008571063732539392\",\"session_id\":\"49dfe3c23a84328d01c8e08bede27952\",\"data\":{\"version\":\"994261739745050686\",\"id\":\"938956540159881230\",\"name\":\"imagine\",\"type\":1,\"options\":[{\"type\":3,\"name\":\"prompt\",\"value\":\"A rebot learning to program itself in purple background\"}],\"application_command\":{\"id\":\"938956540159881230\",\"application_id\":\"936929561302675456\",\"version\":\"994261739745050686\",\"default_permission\":true,\"default_member_permissions\":null,\"type\":1,\"nsfw\":false,\"name\":\"imagine\",\"description\":\"There are endless possibilities...\",\"dm_permission\":true,\"options\":[{\"type\":3,\"name\":\"prompt\",\"description\":\"The prompt to imagine\",\"required\":true}]},\"attachments\":[]},\"nonce\":\"1057173446309445632\"}\r\n------WebKitFormBoundaryHzDLGhlryAjGBUT1--\r\n",
+        "body": `------WebKitFormBoundaryHzDLGhlryAjGBUT1\r\nContent-Disposition: form-data; name=\"payload_json\"\r\n\r\n{\"type\":2,\"application_id\":\"936929561302675456\",\"guild_id\":\"662267976984297473\",\"channel_id\":\"1008571063732539392\",\"session_id\":\"49dfe3c23a84328d01c8e08bede27952\",\"data\":{\"version\":\"994261739745050686\",\"id\":\"938956540159881230\",\"name\":\"imagine\",\"type\":1,\"options\":[{\"type\":3,\"name\":\"prompt\",\"value\":\"${prompt}\"}],\"application_command\":{\"id\":\"938956540159881230\",\"application_id\":\"936929561302675456\",\"version\":\"994261739745050686\",\"default_permission\":true,\"default_member_permissions\":null,\"type\":1,\"nsfw\":false,\"name\":\"imagine\",\"description\":\"There are endless possibilities...\",\"dm_permission\":true,\"options\":[{\"type\":3,\"name\":\"prompt\",\"description\":\"The prompt to imagine\",\"required\":true}]},\"attachments\":[]},\"nonce\":\"1057173446309445632\"}\r\n------WebKitFormBoundaryHzDLGhlryAjGBUT1--\r\n`,
         "method": "POST"
     });
 
     // const data = await request.json();
     console.log(request);
 }
-useFetch();
+
+
+module.exports = getMidJourneyImage;

@@ -1,0 +1,7 @@
+[API Error][2023-01-05T00:44:57.728Z][#500]: {"type":"error","status":500,"message":"temperature is not defined"}
+[API Error][2023-01-05T01:00:21.987Z][#500]: {"type":"error","status":500,"message":"res6.map is not a function"}
+[API Error][2023-01-05T01:01:32.434Z][#500]: {"type":"error","status":500,"message":"Assignment to constant variable."}
+[API Error][2023-01-05T01:42:03.900Z][#500]: {"type":"error","status":500,"message":"Cannot read properties of undefined (reading 'json')"}
+[API Error][2023-01-05T01:46:34.776Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-01-05T07:44:01.952Z][#500]: {"type":"error","status":500,"message":"read ECONNRESET"}
+[API Error][2023-01-05T07:45:41.057Z][#500]: {"type":"error","status":500,"message":"read ECONNRESET"}

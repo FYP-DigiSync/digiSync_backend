@@ -4,10 +4,11 @@ const sharp = require('sharp');
 const axios = require("axios");
 const imageModel = require("../Models/graphicModel");
 const { validationResult } = require("express-validator");
-
 const midJourneyRecentPostFetch = require("../Utils/midJourney");
-
 const backgroundExtension= require("../Utils/backgroundExtension");
+const getHashtags = require("../Utils/hashtagsGenerate");
+const dummyData = require("../Utils/dummydata");
+const getMidJourneyImage = require('./temp1');
 
 // const getPalette = require('dont-crop').getPaletteFromImageData;
 // const fitGradient = require('dont-crop').fitGradientToImageData;
@@ -72,15 +73,19 @@ class postController {
             return next(new errorHandler(400, "Input validation error", errors));
         }
         // Request the MidJourney API to generate a post task
+        // const request_a = await getMidJourneyImage(prompt);
+
+        // // wait for 1 minute for the post to be generated
+        // await new Promise((resolve) => setTimeout(resolve, 90000));
 
         // get the recent post from midJourney
         const recentPost= await midJourneyRecentPostFetch();
-        if(!recentPost || !recentPost.data.length || !recentPost.data[2].image_paths){
+        if(!recentPost || !recentPost.data.length || !recentPost.data[0].image_paths){
             return next(new errorHandler(400, "Error fetching recent post", recentPost));
         }
 
         // Extension of the image
-        const extendedbackground= await backgroundExtension("midJourney",recentPost.data[2].image_paths); 
+        const extendedbackground= await backgroundExtension("midJourney",recentPost.data[0].image_paths); 
 
         extendedbackground.prompt= recentPost.data[0].prompt;
         // return res.status(200).json(recentPost.data[0].image_paths);
@@ -103,9 +108,8 @@ class postController {
         if (!errors.isEmpty()) {
             return next(new errorHandler(400, "Input validation error", errors));
         }
-        console.log(req.body);
         let {prefix, temperature, batch_size}= req.body;
-        batch_size=5;
+
         // sent a post request to the server
         let response = await axios.post("http://localhost:8080/", {prefix, temperature, batch_size});
         if(!response || !response.data || !response.data.text){
@@ -123,6 +127,96 @@ class postController {
         }
         res.status(200).json(res1);
     }
+
+
+    // Caption Generation
+    generateCaption= async(req,res, next)=>{
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return next(new errorHandler(400, "Input validation error", errors));
+        }
+        let {prefix}= req.body;
+        // sent a post request to the server
+        let response = await axios.post("http://localhost:8080/captions", {length:'300', temperature:'0.7', prefix,'output_count':5});
+        if(!response || !response.data || !response.data.data){
+            return next(new errorHandler(400, "Error getting poster content", response));
+        }
+        response= response.data.data;
+        console.log(response);
+        const res1=[];
+        for(let i=0; i<response.length; i++){
+            // remove the _TOPIC_ fashion _QUOTE_ from the start
+            let text = response[i].replace(/_TOPIC_.*_QUOTE_/g, "");
+            // remove "_AUTHOR_ AI" from the end
+            text = text.replace(/_AUTHOR_.*AI/g, "");  
+            res1.push(text);
+        }
+        res.status(200).json(res1);
+    }
+
+
+    // Generation Hashtag
+    generateHashtag= async(req,res, next)=>{
+        if (!req?.body?.caption) {
+            return next(new errorHandler(400, "Input validation error, caption is required", errors));
+        }
+
+        let {caption}= req.body;
+        // sent a post request to the server
+        let response = await axios.post("http://localhost:8080/hashtags", {caption});
+        if(!response || !response.data || !response.data ){
+            return next(new errorHandler(400, "Error getting poster content", response));
+        }
+        response= response.data;
+
+        const {SingleKeyword,MutipleLineKeyword}= response.data[0];
+        // Catinate the single keyword and the multiple line keyword
+        const res1= SingleKeyword.concat(MutipleLineKeyword);
+        // filter the value with probability greater than 0.2
+        const res2= res1.filter((item)=> item[1]>0.20);
+        
+        // remove duplicate item base on key0 from the list
+        const res3= res2.filter((item, index, self) => index === self.findIndex((t) => (t[0] === item[0])));
+
+        // make comma separated string from res3
+        const res4= res3.map((item)=> item[0]).join(", ");
+        
+
+        const res5= await getHashtags(res4);
+        let res6= await res5.json();
+        if(!res6 || !res6.data || !res6.data.similarHashtagsLists){
+            return next(new errorHandler(500, "Internal server Error", res5));
+        }
+        
+        res6= res6.data.similarHashtagsLists;
+        // dummy data combile all hashtag value to single list
+        
+        const res7= res6.map((item)=> item.hashtags);
+        let endResult=[];
+        for(let i=0; i<res7.length; i++){
+            endResult= [...endResult, ...res7[i]];
+        }
+        console.log(res3);
+
+        // filter the value to remove hidden hashtag
+        const res8= endResult.filter((item)=> item.isHidden===false);
+
+
+        for(let i=0; i<res3.length; i++){
+            res8.push({
+                "id": Math.random().toString(36),
+                "name": res3[i][0],
+                "mediaCount": "170581800",
+                "selected": false,
+                "isHidden": false,
+                "isSmart": false,
+                "isInstaRelated": false
+            });
+        }
+        // res.status(200).json(res6.data.similarHashtagsLists);
+        res.status(200).json(res8);
+    }
+
 
     // postFile(req, res, next) {
     //     const file= req.files.file;

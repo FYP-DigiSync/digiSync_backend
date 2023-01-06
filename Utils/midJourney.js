@@ -2,7 +2,7 @@ const axios= require('axios');
 
 // duplicate of the above function, with axios
 const fetchRecentPosts= async()=> {
-    return await axios.get('https://www.midjourney.com/api/app/recent-jobs/?amount=4&jobType=null&orderBy=new&user_id_ranked_score=null&jobStatus=completed&userId=1056989071886520361&dedupe=true&refreshApi=1', {
+    return await axios.get('https://www.midjourney.com/api/app/recent-jobs/?amount=1&jobType=null&orderBy=new&user_id_ranked_score=null&jobStatus=completed&userId=1056989071886520361&dedupe=true&refreshApi=1', {
         "headers":  {
             "accept": "*/*",
             "accept-language": "en-GB,en;q=0.9,en-US;q=0.8",
