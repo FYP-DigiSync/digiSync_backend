@@ -59,7 +59,8 @@ app.use(errorMiddleware);
 const port= process.env.PORT || 3000;
 const mongoURL = process.env.MONGO_URL;
 
-
+// Set strictQuery to false to allow for more flexible queries
+mongoose.set("strictQuery", false);
 // Connect to MongoDB
 mongoose.connect(mongoURL, {
   useNewUrlParser: true, useUnifiedTopology: true

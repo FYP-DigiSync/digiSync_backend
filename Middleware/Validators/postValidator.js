@@ -7,4 +7,9 @@ const createPostContentSchema = [
 ]
 
 
-module.exports = {createPostContentSchema};
+const generateCaptionSchema = [
+    body('prefix').exists({ checkFalsy: true }).withMessage("Catagory is required").bail(),
+]
+
+
+module.exports = {createPostContentSchema, generateCaptionSchema};
