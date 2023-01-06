@@ -213,7 +213,7 @@ class metaController {
         if (!req?.body?.data) {
             return next(new errorHandler(400, "Image not found"));
         }
-        console.log(req.body.message);
+        // console.log(req.body.message);
 
         let data = req.body.data;
         data = data.replace(/^data:image\/\w+;base64,/, "");
@@ -221,13 +221,16 @@ class metaController {
         for (let i = 0; i < 5; i++) {
             console.log(data[i]);
         }
+        console.log("dkddk")
 
         const buffer = Buffer.from(data, 'base64');
-        const res1_a = await sharp(buffer).resize(1080, 1080).toBuffer();
+        const res1_a = await sharp(buffer).jpeg().toBuffer();
+        console.log('dldld');
+
 
         const uploadId = `${Math.random().toString(36)}${Math.random().toString(36)}`;
         console.log(uploadId);
-        const path = `./Uploads/${uploadId}.jpg`;
+        const path = `./Uploads/${uploadId}.jpeg`;
         fs.writeFileSync(`${path}`, res1_a);
 
 

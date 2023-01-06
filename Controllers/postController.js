@@ -73,22 +73,33 @@ class postController {
             return next(new errorHandler(400, "Input validation error", errors));
         }
         // Request the MidJourney API to generate a post task
-        // const request_a = await getMidJourneyImage(prompt);
+        const request_a = await getMidJourneyImage(prompt);
 
-        // // wait for 1 minute for the post to be generated
-        // await new Promise((resolve) => setTimeout(resolve, 90000));
+
 
         // get the recent post from midJourney
-        const recentPost= await midJourneyRecentPostFetch();
-        if(!recentPost || !recentPost.data.length || !recentPost.data[0].image_paths){
-            return next(new errorHandler(400, "Error fetching recent post", recentPost));
-        }
+        let recentPost= await midJourneyRecentPostFetch();
+        // wait for 1 minute and try again
+        // await new Promise((resolve) => setTimeout(resolve, 80000));
+        
+        // while(true){
+            if(!recentPost || !recentPost.data.length || !recentPost.data[0].image_paths){
+                return next(new errorHandler(400, "Error fetching recent post", recentPost));
+            }
+        //     // compare the prompt with the recent post prompt
+        //     if(recentPost.data[0].prompt === prompt){
+        //         break;
+        //     }else{
+        //         // wait for 30 seconds and try again
+        //         await new Promise((resolve) => setTimeout(resolve, 10000));
+        //         recentPost= await midJourneyRecentPostFetch();
+        //     }
+        // }
 
-        // Extension of the image
+        // // Extension of the image
         const extendedbackground= await backgroundExtension("midJourney",recentPost.data[0].image_paths); 
-
         extendedbackground.prompt= recentPost.data[0].prompt;
-        // return res.status(200).json(recentPost.data[0].image_paths);
+        // return res.status(200).json(recentPost.data);
         res.status(200).json(extendedbackground);
         
     }
