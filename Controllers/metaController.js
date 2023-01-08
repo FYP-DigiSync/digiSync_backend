@@ -96,25 +96,40 @@ class metaController {
         return res.status(201).json("success");
     }
     postOnFB = async (req, res, next) => {
-        const err = validationResult(req);
-        if (!err.isEmpty()) {
-            return next(new errorHandler(400, "Input validation failed", err));
+        
+        if (!req?.body?.message) {
+            return next(new errorHandler(400, "caption not found"));
         }
-        if (!req.files.picture) {
-            return next(new errorHandler(400, "picture not found", err));
+        if (!req?.body?.data) {
+            return next(new errorHandler(400, "Image not found"));
         }
-        if (!req.body.message) {
-            return next(new errorHandler(400, "message not found", err));
-        }
-
-        const file = req.files.picture;
+        
+        let data = req.body.data;
+        data = data.replace(/^data:image\/\w+;base64,/, "");
+        
+        const buffer = Buffer.from(data, 'base64');
+        const res1_a = await sharp(buffer).jpeg().toBuffer();
+        // console.log('dldld');
+        
+        
         const uploadId = `${Math.random().toString(36)}${Math.random().toString(36)}`;
-        const path = `./Uploads/${uploadId}.${file.name.split(".")[1]}`;
-        await file.mv(path, (err) => {
-            if (err) {
-                return next(new errorHandler(400, "Error saving file", err));
-            }
-        })
+        console.log(uploadId);
+        const path = `./Uploads/${uploadId}.jpeg`;
+        fs.writeFileSync(`${path}`, res1_a);
+        const path1 = `${uploadId}.jpg`;
+
+
+        // const file = req.files.picture;
+        // const uploadId = `${Math.random().toString(36)}${Math.random().toString(36)}`;
+        // const path1 = `${uploadId}.${file.name.split(".")[1]}`;
+        // const file = req.files.picture;
+        // const uploadId = `${Math.random().toString(36)}${Math.random().toString(36)}`;
+        // const path = `./Uploads/${uploadId}.${file.name.split(".")[1]}`;
+        // await file.mv(path, (err) => {
+        //     if (err) {
+        //         return next(new errorHandler(400, "Error saving file", err));
+        //     }
+        // })
 
         const id = await metaModel.findOne({ user: req.thisuser })
         if (!id) {
@@ -141,29 +156,46 @@ class metaController {
 
     }
     schedulePostOnFB = async (req, res, next) => {
-        const err = validationResult(req);
-        if (!err.isEmpty()) {
-            return next(new errorHandler(400, "Input validation failed", err));
+        if (!req?.body?.message) {
+            return next(new errorHandler(400, "caption not found"));
         }
-        if (!req.files.picture) {
-            return next(new errorHandler(400, "picture not found", err));
+        if (!req?.body?.data) {
+            return next(new errorHandler(400, "Image not found"));
         }
-        if (!req.body.message) {
-            return next(new errorHandler(400, "message not found", err));
+        if (!req?.body?.time) {
+            return next(new errorHandler(400, "time not found"));
         }
-        if (!req.body.time) {
-            return next(new errorHandler(400, "time not found", err));
-        }
+        // console.log(req.body.message);
 
-        const file = req.files.picture;
+        let data = req.body.data;
+        data = data.replace(/^data:image\/\w+;base64,/, "");
+        // display intial image byte
+        for (let i = 0; i < 5; i++) {
+            console.log(data[i]);
+        }
+        console.log("dkddk")
+        
+        const buffer = Buffer.from(data, 'base64');
+        const res1_a = await sharp(buffer).jpeg().toBuffer();
+        // console.log('dldld');
+        
+        
         const uploadId = `${Math.random().toString(36)}${Math.random().toString(36)}`;
-        const path1 = `${uploadId}.${file.name.split(".")[1]}`;
-        const path = `./Uploads/${path1}`;
-        await file.mv(path, (err) => {
-            if (err) {
-                return next(new errorHandler(400, "Error saving file", err));
-            }
-        })
+        console.log(uploadId);
+        const path = `./Uploads/${uploadId}.jpeg`;
+        fs.writeFileSync(`${path}`, res1_a);
+
+
+        // const file = req.files.picture;
+        // const uploadId = `${Math.random().toString(36)}${Math.random().toString(36)}`;
+        // const path1 = `${uploadId}.${file.name.split(".")[1]}`;
+        const path1 = `${uploadId}.jpg`;
+        // const path = `./Uploads/${path1}`;
+        // await file.mv(path, (err) => {
+        //     if (err) {
+        //         return next(new errorHandler(400, "Error saving file", err));
+        //     }
+        // })
 
         const generationMatchPrecondition = 0
         const options = {
@@ -225,7 +257,7 @@ class metaController {
 
         const buffer = Buffer.from(data, 'base64');
         const res1_a = await sharp(buffer).jpeg().toBuffer();
-        console.log('dldld');
+        // console.log('dldld');
 
 
         const uploadId = `${Math.random().toString(36)}${Math.random().toString(36)}`;
@@ -234,7 +266,7 @@ class metaController {
         fs.writeFileSync(`${path}`, res1_a);
 
 
-        console.log("dkjddj");
+        // console.log("dkjddj");
 
 
         const path1 = `${uploadId}.jpg`;
