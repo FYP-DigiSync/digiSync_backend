@@ -7,3 +7,4 @@
 [API Error][2023-01-08T16:01:01.708Z][#404]: {"type":"error","status":404,"message":"user not found in db","errors":[]}
 [API Error][2023-01-08T16:01:05.956Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
 [API Error][2023-01-08T16:02:17.626Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-01-08T20:47:00.739Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
