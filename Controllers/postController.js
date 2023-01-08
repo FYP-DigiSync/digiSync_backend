@@ -2,79 +2,62 @@ const Dalle = require("../Utils/dalle2");
 const errorHandler = require("../Utils/errorHandler");
 const sharp = require('sharp');
 const axios = require("axios");
-const { promisefyCallback, saveImageToFile } = require("../Utils/promisfyCallback");
 const imageModel = require("../Models/graphicModel");
 const { validationResult } = require("express-validator");
+const midJourneyRecentPostFetch = require("../Utils/midJourney");
+const backgroundExtension= require("../Utils/backgroundExtension");
+const getHashtags = require("../Utils/hashtagsGenerate");
+const dummyData = require("../Utils/dummydata");
+const getMidJourneyImage = require('./temp1');
+
+const posterModel= require('../Models/posterModel');
+
+// const getPalette = require('dont-crop').getPaletteFromImageData;
+// const fitGradient = require('dont-crop').fitGradientToImageData;
+
 
 class postController {
 
+    // getImageData = async(path)=> {
+    //     let image = sharp(path).resize(440, 440);
+    //     const { data, info } = await image
+    //       .ensureAlpha()
+    //       .toColorspace('srgb')
+    //       .raw()
+    //       .toBuffer({ resolveWithObject: true });
+    //     if (data.length !== info.width * info.height * 4) {
+    //       throw new Error(`Invalid image dimensions ${data.length} != ${info.width} * ${info.height} * 4`);
+    //     }
+    //     const imageData = {
+    //       width: info.width,
+    //       height: info.height,
+    //       data: new Uint8ClampedArray(data.buffer),
+    //     };
+    //     return imageData;
+    // }
+
+    // Generate graphics using Dalle2 API
     generateGraphics = async (req, res, next) => {
         const { prompt } = req.body;
         console.log(prompt);
         if (!prompt) {
             return next(new errorHandler(400, "Prompt is required"));
         }
-        const dalle = new Dalle("sess-laLTIUdvC3qUwsRnryRGUMiBansJ9rr4HNWGhlv7");
+        const dalle = new Dalle("sess-gIR1xI2197xjylZJPe73VkV6MPQsu9ZZQ2IsFV2C");
         const generations = await dalle.generate(prompt);
         if (!generations?.generations?.data) {
             return next(new errorHandler(400, "Error generation graphics",generations ));
         }
-        const res1 = generations.generations.data;
-        let res2 = {
-            prompt: prompt,
-            generation:[]
-        };
+        const res1 = generations.generations.data;        
+        let imageUrl = [];
 
-        for (let i = 0; i < res1.length; i++) {
-            const response = await axios.get(res1[i].generation.image_path, {
-                responseType: "arraybuffer",
-            });
-            const image1 = await sharp(Buffer.from(response.data, "binary")).png().toBuffer();
-            let image2 = await sharp(image1).resize(440, 440).png().toBuffer();
-            let image3 = await sharp(image2).extract({ left: 0, top: 0, width: 1, height: 440 }).png().toBuffer();
-            const averageColor = await promisefyCallback(image3);
-            let length = 5;
-            let image_3a = await sharp(image3).extend({ top: 0, bottom: 0, left: length, right: 0, background: "red" }).png().toBuffer();
-            for(let i=0; i<length; i++){
-                image_3a = await sharp(image_3a).composite([{ input: image3, top: 0, left: i }]).png().toBuffer();
-            }
-            image3= image_3a;
-
-            for (let i = 0; i < 7; i++) {
-                let image5 = await sharp(image3).extend({ top: 0, bottom: 0, left: length, right: 0, background: "red" }).png().toBuffer();
-                image3 = await sharp(image5).composite([{ input: image3, top: 0, left: 0 }]).png().toBuffer();
-                length += length;
-            }
-            image2 = await sharp(image2).extend({ top: 0, bottom: 0, left: 640, right: 0, background: "red" }).png().toBuffer();
-            image2 = await sharp(image2).composite([{ input: image3, top: 0, left: 0 }]).png().toBuffer();
-            // bottom Expansion
-            length = 5;
-            let image4 = await sharp(image2).extract({ left: 0, top: 439, width: 1080, height: 1 }).png().toBuffer();
-            let image4_a= await sharp(image4).extend({ top: 0, bottom: (length-1), left: 0, right: 0, background: "red" }).png().toBuffer();
-            for(let i=1; i<length; i++){
-                image4_a = await sharp(image4_a).composite([{ input: image4, top: i, left: 0 }]).png().toBuffer();
-            }
-            image4= image4_a;
-            for (let i = 0; i < 7; i++) {
-                let image6 = await sharp(image4).extend({ top: 0, bottom: length, left: 0, right: 0, background: "red" }).png().toBuffer();
-                image4 = await sharp(image6).composite([{ input: image4, left: 0, top: length }]).png().toBuffer();
-                length += length;
-            }
-            image2 = await sharp(image2).extend({ top: 0, bottom: 640, left: 0, right: 0, background: "red" }).png().toBuffer();
-            image2 = await sharp(image2).composite([{ input: image4, left: 0, top: 440 }]).png().toBuffer();
-
-            let uploadId = `${Math.random().toString(36)}${Math.random().toString(36)}`;
-            const saveImg = await saveImageToFile(image2, uploadId);
-            if (!saveImg) {
-                return next(new errorHandler(400, "Error saving image", res));
-            }
-            res2.generation.push({
-                "image_path": `http://localhost:4000/digsync/api/v0.1/uploads/${uploadId}.png`,
-                bgcolor:averageColor
-            });
+        for(let i=0; i<res1.length; i++){
+           imageUrl.push(res1[i].generation.image_path);
         }
+        let res2= await backgroundExtension("dallE2",imageUrl);
+        res2.prompt= prompt;
         res.status(200).json(res2);
-        // res.status(200).json(res1);
+        // res.status(200).json("ssksk");
 
         // send image back
         // res.writeHead(200, {
@@ -85,6 +68,45 @@ class postController {
     }
 
 
+    // generate Graphics using midJourney
+    midJourneyGraphics= async (req, res, next) => {
+        const {prompt}= req.body;
+        if(!prompt){
+            return next(new errorHandler(400, "Input validation error", errors));
+        }
+        // Request the MidJourney API to generate a post task
+        const request_a = await getMidJourneyImage(prompt);
+
+
+        // get the recent post from midJourney
+        let recentPost= await midJourneyRecentPostFetch();
+        // wait for 1 minute and try again
+        await new Promise((resolve) => setTimeout(resolve, 80000));
+        
+        while(true){
+            if(!recentPost || !recentPost.data.length || !recentPost.data[0].image_paths){
+                return next(new errorHandler(400, "Error fetching recent post", recentPost));
+            }
+            // compare the prompt with the recent post prompt
+            if(recentPost.data[0].prompt === prompt){
+                break;
+            }else{
+                // wait for 30 seconds and try again
+                await new Promise((resolve) => setTimeout(resolve, 10000));
+                recentPost= await midJourneyRecentPostFetch();
+            }
+        }
+
+
+
+        // // Extension of the image
+        const extendedbackground= await backgroundExtension("midJourney",recentPost.data[0].image_paths); 
+        extendedbackground.prompt= recentPost.data[0].prompt;
+        // return res.status(200).json(recentPost.data);
+        res.status(200).json(extendedbackground);
+        
+    }
+
     getListOfgeneration= async (req, res, next) => {
         const dalle = new Dalle("sess-k5VnW7R8nDpVEwxU1ci4mNg6Pmhxn2altxB9Ae9S");
         const generations = await dalle.list({limit:10});
@@ -94,15 +116,14 @@ class postController {
         return res.status(200).json(generations.generations.data);
     }
 
-
+    // Call to action on the poster
     getPosterContent= async(req,res, next)=>{
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return next(new errorHandler(400, "Input validation error", errors));
         }
-        console.log(req.body);
         let {prefix, temperature, batch_size}= req.body;
-        batch_size=5;
+
         // sent a post request to the server
         let response = await axios.post("http://localhost:8080/", {prefix, temperature, batch_size});
         if(!response || !response.data || !response.data.text){
@@ -120,6 +141,134 @@ class postController {
         }
         res.status(200).json(res1);
     }
+
+
+    // Caption Generation
+    generateCaption= async(req,res, next)=>{
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return next(new errorHandler(400, "Input validation error", errors));
+        }
+        let {prefix}= req.body;
+        // sent a post request to the server
+        let response = await axios.post("http://localhost:8080/captions", {length:'300', temperature:'0.7', prefix,'output_count':5});
+        if(!response || !response.data || !response.data.data){
+            return next(new errorHandler(400, "Error getting poster content", response));
+        }
+        response= response.data.data;
+        console.log(response);
+        const res1=[];
+        for(let i=0; i<response.length; i++){
+            // remove the _TOPIC_ fashion _QUOTE_ from the start
+            let text = response[i].replace(/_TOPIC_.*_QUOTE_/g, "");
+            // remove "_AUTHOR_ AI" from the end
+            text = text.replace(/_AUTHOR_.*AI/g, "");  
+            res1.push(text);
+        }
+        res.status(200).json(res1);
+    }
+
+
+    // Generation Hashtag
+    generateHashtag= async(req,res, next)=>{
+        if (!req?.body?.caption) {
+            return next(new errorHandler(400, "Input validation error, caption is required", errors));
+        }
+
+        let {caption}= req.body;
+        // sent a post request to the server
+        let response = await axios.post("http://localhost:8080/hashtags", {caption});
+        if(!response || !response.data || !response.data ){
+            return next(new errorHandler(400, "Error getting poster content", response));
+        }
+        response= response.data;
+
+        const {SingleKeyword,MutipleLineKeyword}= response.data[0];
+        // Catinate the single keyword and the multiple line keyword
+        const res1= SingleKeyword.concat(MutipleLineKeyword);
+        // filter the value with probability greater than 0.2
+        const res2= res1.filter((item)=> item[1]>0.20);
+        
+        // remove duplicate item base on key0 from the list
+        const res3= res2.filter((item, index, self) => index === self.findIndex((t) => (t[0] === item[0])));
+
+        // make comma separated string from res3
+        const res4= res3.map((item)=> item[0]).join(", ");
+        
+        const res5= await getHashtags(res4);
+        let res6= await res5.json();
+        if(!res6 || !res6.data || !res6.data.similarHashtagsLists){
+            return next(new errorHandler(500, "Internal server Error", res5));
+        }
+        
+        res6= res6.data.similarHashtagsLists;
+        // dummy data combile all hashtag value to single list
+        
+        const res7= res6.map((item)=> item.hashtags);
+        let endResult=[];
+        for(let i=0; i<res7.length; i++){
+            endResult= [...endResult, ...res7[i]];
+        }
+        console.log(res3);
+
+        // filter the value to remove hidden hashtag
+        const res8= endResult.filter((item)=> item.isHidden===false);
+
+
+        for(let i=0; i<res3.length; i++){
+            res8.push({
+                "id": Math.random().toString(36),
+                "name": res3[i][0],
+                "mediaCount": "170581800",
+                "selected": false,
+                "isHidden": false,
+                "isSmart": false,
+                "isInstaRelated": false
+            });
+        }
+        // res.status(200).json(res6.data.similarHashtagsLists);
+        res.status(200).json(res8);
+    }
+
+
+    // get posters 
+    getSavedPoster= async(req,res, next)=>{
+        const result= await posterModel.find({userId: req.thisuser._id});
+        if(!result){
+            return next(new errorHandler(400, "Error getting poster content", res));
+        }
+        res.status(200).json(result);
+    }
+    
+
+    // addPoster
+    savePoster= async(req,res, next)=>{
+        console.log(req.body);
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return next(new errorHandler(400, "Input validation error", errors));
+        }
+        const userId = req.thisuser._id;
+        console.log(userId);
+        const result= await posterModel.create({...req.body, userId:userId});
+        if(!result ){
+            return next(new errorHandler(400, "Error getting poster content", res));
+        }
+        res.status(201).json(result);
+    }
+
+
+    // postFile(req, res, next) {
+    //     const file= req.files.file;
+    //     const uploadId = `${Math.random().toString(36)}${Math.random().toString(36)}`;
+    //     const path= `./uploads/${uploadId}.${file.name.split(".")[1]}`;
+    //     file.mv(path, (err)=>{
+    //         if(err){
+    //             return next(new errorHandler(400, "Error saving file", err));
+    //         }
+    //         res.status(200).json({path:`http://localhost:4000/digsync/api/v0.1/uploads/${uploadId}.${file.name.split(".")[1]}`});
+    //     })
+    // }
 }
 
 
