@@ -1,3 +1,5 @@
+const fetch = require("node-fetch");
+
 const getMidJourneyImage = async (prompt) => {
     const request = await fetch("https://discord.com/api/v9/interactions", {
         "headers": {

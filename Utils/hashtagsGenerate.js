@@ -1,3 +1,4 @@
+const fetch = require("node-fetch");
 const getHashtags = async (keywords) => {
     return  await fetch("https://inflact.com/hg/hashtag/search/", {
         "headers": {
