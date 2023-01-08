@@ -41,3 +41,6 @@
 [API Error][2023-01-01T23:59:57.159Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 400"}
 [API Error][2023-01-02T00:00:23.322Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 400"}
 [API Error][2023-01-02T00:27:54.311Z][#500]: {"type":"error","status":500,"message":"Request failed with status code 400"}
+[API Error][2023-01-04T22:22:45.135Z][#401]: {"type":"error","status":401,"message":"Authentication failed! No user found"}
+[API Error][2023-01-04T22:23:00.270Z][#401]: {"type":"error","status":401,"message":"Authentication failed! No user found"}
+[API Error][2023-01-04T22:23:50.267Z][#404]: {"type":"error","status":404,"message":"user not found in db","errors":[]}
