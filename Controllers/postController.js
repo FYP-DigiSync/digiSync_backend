@@ -10,6 +10,8 @@ const getHashtags = require("../Utils/hashtagsGenerate");
 const dummyData = require("../Utils/dummydata");
 const getMidJourneyImage = require('./temp1');
 
+const posterModel= require('../Models/posterModel');
+
 // const getPalette = require('dont-crop').getPaletteFromImageData;
 // const fitGradient = require('dont-crop').fitGradientToImageData;
 
@@ -76,25 +78,26 @@ class postController {
         const request_a = await getMidJourneyImage(prompt);
 
 
-
         // get the recent post from midJourney
         let recentPost= await midJourneyRecentPostFetch();
         // wait for 1 minute and try again
-        // await new Promise((resolve) => setTimeout(resolve, 80000));
+        await new Promise((resolve) => setTimeout(resolve, 80000));
         
-        // while(true){
+        while(true){
             if(!recentPost || !recentPost.data.length || !recentPost.data[0].image_paths){
                 return next(new errorHandler(400, "Error fetching recent post", recentPost));
             }
-        //     // compare the prompt with the recent post prompt
-        //     if(recentPost.data[0].prompt === prompt){
-        //         break;
-        //     }else{
-        //         // wait for 30 seconds and try again
-        //         await new Promise((resolve) => setTimeout(resolve, 10000));
-        //         recentPost= await midJourneyRecentPostFetch();
-        //     }
-        // }
+            // compare the prompt with the recent post prompt
+            if(recentPost.data[0].prompt === prompt){
+                break;
+            }else{
+                // wait for 30 seconds and try again
+                await new Promise((resolve) => setTimeout(resolve, 10000));
+                recentPost= await midJourneyRecentPostFetch();
+            }
+        }
+
+
 
         // // Extension of the image
         const extendedbackground= await backgroundExtension("midJourney",recentPost.data[0].image_paths); 
@@ -192,7 +195,6 @@ class postController {
         // make comma separated string from res3
         const res4= res3.map((item)=> item[0]).join(", ");
         
-
         const res5= await getHashtags(res4);
         let res6= await res5.json();
         if(!res6 || !res6.data || !res6.data.similarHashtagsLists){
@@ -226,6 +228,33 @@ class postController {
         }
         // res.status(200).json(res6.data.similarHashtagsLists);
         res.status(200).json(res8);
+    }
+
+
+    // get posters 
+    getSavedPoster= async(req,res, next)=>{
+        const result= await posterModel.find({userId: req.thisuser._id});
+        if(!result){
+            return next(new errorHandler(400, "Error getting poster content", res));
+        }
+        res.status(200).json(result);
+    }
+    
+
+    // addPoster
+    savePoster= async(req,res, next)=>{
+        console.log(req.body);
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return next(new errorHandler(400, "Input validation error", errors));
+        }
+        const userId = req.thisuser._id;
+        console.log(userId);
+        const result= await posterModel.create({...req.body, userId:userId});
+        if(!result ){
+            return next(new errorHandler(400, "Error getting poster content", res));
+        }
+        res.status(201).json(result);
     }
 
 

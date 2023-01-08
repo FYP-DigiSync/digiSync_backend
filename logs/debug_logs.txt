@@ -25,3 +25,99 @@
 [API Error][2023-01-06T18:53:06.450Z][#500]: {"type":"error","status":500,"message":"pngload_buffer: libspng read error\n"}
 [API Error][2023-01-06T19:01:47.151Z][#500]: {"type":"error","status":500,"message":"pngload_buffer: libspng read error\n"}
 [API Error][2023-01-06T19:02:38.390Z][#500]: {"type":"error","status":500,"message":"pngload_buffer: libspng read error\n"}
+[API Error][2023-01-06T19:25:22.126Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-01-06T20:27:27.086Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-01-06T20:28:09.829Z][#500]: {"type":"error","status":500,"message":"connect ECONNREFUSED ::1:8080"}
+[API Error][2023-01-06T20:28:40.766Z][#500]: {"type":"error","status":500,"message":"connect ECONNREFUSED ::1:8080"}
+[API Error][2023-01-07T07:08:44.303Z][#500]: {"type":"error","status":500,"message":"fn is not a function"}
+[API Error][2023-01-07T07:09:52.300Z][#400]: {"type":"error","status":400,"message":"Input validation error","errors":[{"msg":"prompt is required","param":"prompt","location":"body"},{"msg":"Invalid value","param":"image","location":"body"},{"msg":"image is an array & required","param":"image","location":"body"},{"msg":"catagory is required","param":"catagory","location":"body"},{"msg":"selectedText is required","param":"selectedText","location":"body"},{"msg":"Title is required","param":"title","location":"body"},{"msg":"Promotion is required","param":"promotion","location":"body"},{"msg":"Contact is required","param":"contact","location":"body"},{"msg":"Description is required","param":"description","location":"body"},{"msg":"caption is required","param":"caption","location":"body"},{"msg":"hastag is required","param":"hastag","location":"body"}]}
+[API Error][2023-01-07T07:11:06.861Z][#400]: {"type":"error","status":400,"message":"Input validation error","errors":[{"msg":"prompt is required","param":"prompt","location":"body"},{"value":"srcvkvvjv","msg":"image is an array & required","param":"image","location":"body"},{"msg":"catagory is required","param":"catagory","location":"body"},{"msg":"selectedText is required","param":"selectedText","location":"body"},{"msg":"Title is required","param":"title","location":"body"},{"msg":"Promotion is required","param":"promotion","location":"body"},{"msg":"Contact is required","param":"contact","location":"body"},{"msg":"Description is required","param":"description","location":"body"},{"msg":"caption is required","param":"caption","location":"body"},{"msg":"hastag is required","param":"hastag","location":"body"}]}
+[API Error][2023-01-07T07:11:56.063Z][#400]: {"type":"error","status":400,"message":"Unexpected token ] in JSON at position 56"}
+[API Error][2023-01-07T07:12:27.127Z][#400]: {"type":"error","status":400,"message":"Input validation error","errors":[{"msg":"catagory is required","param":"catagory","location":"body"},{"msg":"selectedText is required","param":"selectedText","location":"body"},{"msg":"Title is required","param":"title","location":"body"},{"msg":"Promotion is required","param":"promotion","location":"body"},{"msg":"Contact is required","param":"contact","location":"body"},{"msg":"Description is required","param":"description","location":"body"},{"msg":"caption is required","param":"caption","location":"body"},{"msg":"hastag is required","param":"hastag","location":"body"}]}
+[API Error][2023-01-07T07:14:39.534Z][#400]: {"type":"error","status":400,"message":"Input validation error","errors":[{"msg":"Title is required","param":"title","location":"body"},{"msg":"hastag is required","param":"hastag","location":"body"}]}
+[API Error][2023-01-07T07:14:48.851Z][#400]: {"type":"error","status":400,"message":"Input validation error","errors":[{"msg":"hastag is required","param":"hastag","location":"body"}]}
+[API Error][2023-01-07T07:15:08.818Z][#400]: {"type":"error","status":400,"message":"Input validation error","errors":[{"msg":"hastag is required","param":"hastag","location":"body"}]}
+[API Error][2023-01-07T07:15:36.297Z][#500]: {"type":"error","status":500,"message":"posterModel validation failed: image: Cast to embedded failed for value \"jjfjvvjvjv\" (type string) at path \"image\" because of \"ObjectParameterError\", userId: Path `userId` is required."}
+[API Error][2023-01-07T07:18:21.085Z][#400]: {"type":"error","status":400,"message":"Unexpected token ] in JSON at position 158"}
+[API Error][2023-01-07T07:19:34.584Z][#500]: {"type":"error","status":500,"message":"posterModel validation failed: userId: Path `userId` is required."}
+[API Error][2023-01-07T07:23:49.956Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-01-07T07:25:24.902Z][#500]: {"type":"error","status":500,"message":"connect ECONNREFUSED ::1:8080"}
+[API Error][2023-01-07T07:26:08.490Z][#500]: {"type":"error","status":500,"message":"connect ECONNREFUSED ::1:8080"}
+[API Error][2023-01-07T09:30:50.302Z][#400]: {"type":"error","status":400,"message":"Input validation error","errors":[{"msg":"hashtag is required","param":"hashtag","location":"body"}]}
+[API Error][2023-01-07T09:31:39.547Z][#400]: {"type":"error","status":400,"message":"Input validation error","errors":[{"msg":"hashtag is required","param":"hashtag","location":"body"}]}
+[API Error][2023-01-07T09:32:00.692Z][#500]: {"type":"error","status":500,"message":"posterModel validation failed: selectedText: Cast to string failed for value \"[\n  '  It can work  a supercomputer to perform any task in a file  b',\n  '  Artificial Intelligence is also used in the delivery of medical services  v',\n  '  Thus, Artificial Intelligence can reduce the workload of humans to an all-inclusive safety net  ',\n  '  It is a machine learning system which is built on top of Artificial Intelligence in Artificial Intelligence-based systems  ',\n  '  Also, some regions with high traffic may see increased traffic jams  ',\n  '  In such a system, a machine can perform a task beyond its human limitations, such as assembling large articles, or assembling and analyzing very expensive objects such as aircraft parts or machinery  ',\n  '  Artificial Intelligence is a branch of computer science and technology  ',\n  '  This includes developing a new process for data access, complex algorithms, and high-level knowledge  ',\n  '  A good Artificial Intelligence algorithm will learn from its past mistakes and make better decisions accordingly  ',\n  ' Personalized pricing is going to become an increasing trend in all aspects of our lives  '\n]\" (type Array) at path \"selectedText\""}
+[API Error][2023-01-07T10:09:32.032Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2023-01-07T11:53:58.678Z][#401]: {"type":"error","status":401,"message":"Password does not match! Enter correct password"}
+[API Error][2023-01-07T11:54:34.167Z][#500]: {"type":"error","status":500,"message":"connect ECONNREFUSED ::1:8080"}
+[API Error][2023-01-07T12:12:07.124Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2023-01-07T12:12:07.125Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}[API Error][2023-01-07T12:12:07.126Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+
+[API Error][2023-01-07T12:12:07.127Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2023-01-07T12:25:51.980Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2023-01-07T12:34:28.293Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2023-01-07T12:34:30.639Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2023-01-07T12:38:01.536Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T12:38:13.784Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T13:08:02.840Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-01-07T13:08:21.721Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T14:10:29.302Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2023-01-07T14:10:35.684Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2023-01-07T14:46:32.358Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T14:47:55.230Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-01-07T16:06:49.674Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2023-01-07T16:13:40.735Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-01-07T16:14:00.299Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-01-07T17:00:08.519Z][#401]: {"type":"error","status":401,"message":"Password does not match! Enter correct password"}
+[API Error][2023-01-07T17:00:27.061Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-01-07T17:00:46.420Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:05:04.612Z][#500]: {"type":"error","status":500,"message":"posterModel validation failed: hashtag: Cast to string failed for value \"[]\" (type Array) at path \"hashtag\""}
+[API Error][2023-01-07T17:05:08.980Z][#500]: {"type":"error","status":500,"message":"posterModel validation failed: hashtag: Cast to string failed for value \"[]\" (type Array) at path \"hashtag\""}
+[API Error][2023-01-07T17:11:35.542Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-01-07T17:11:54.646Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:21:41.300Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:25:15.922Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:27:21.356Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:30:17.895Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:34:32.292Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:35:33.819Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:37:46.124Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:40:53.766Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:41:14.930Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:43:12.761Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:43:58.422Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:43:58.424Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:45:19.757Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:45:27.742Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:45:49.047Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:45:58.483Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:46:16.677Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:46:19.762Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:46:32.789Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:47:40.363Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2023-01-07T17:47:57.360Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2023-01-07T17:48:03.402Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2023-01-07T17:48:19.405Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2023-01-07T17:49:02.001Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:52:03.177Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-01-07T17:52:15.736Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:57:43.553Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:57:49.332Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T17:59:10.418Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T18:09:35.319Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T18:10:15.919Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
+[API Error][2023-01-07T20:28:49.647Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-01-07T20:32:54.880Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-01-07T20:56:36.989Z][#400]: {"type":"error","status":400,"message":"Input validation error","errors":[{"msg":"selectedText is required","param":"selectedText","location":"body"}]}
+[API Error][2023-01-07T20:56:38.350Z][#400]: {"type":"error","status":400,"message":"Input validation error","errors":[{"msg":"selectedText is required","param":"selectedText","location":"body"}]}
+[API Error][2023-01-07T21:33:23.741Z][#400]: {"type":"error","status":400,"message":"Input validation error","errors":[{"value":"","msg":"prompt is required","param":"prompt","location":"body"},{"value":"","msg":"catagory is required","param":"catagory","location":"body"},{"msg":"selectedText is required","param":"selectedText","location":"body"},{"value":"","msg":"Title is required","param":"title","location":"body"},{"value":"","msg":"Promotion is required","param":"promotion","location":"body"},{"value":"","msg":"Contact is required","param":"contact","location":"body"},{"value":"","msg":"Description is required","param":"description","location":"body"}]}
+[API Error][2023-01-07T21:33:25.153Z][#400]: {"type":"error","status":400,"message":"Input validation error","errors":[{"value":"","msg":"prompt is required","param":"prompt","location":"body"},{"value":"","msg":"catagory is required","param":"catagory","location":"body"},{"msg":"selectedText is required","param":"selectedText","location":"body"},{"value":"","msg":"Title is required","param":"title","location":"body"},{"value":"","msg":"Promotion is required","param":"promotion","location":"body"},{"value":"","msg":"Contact is required","param":"contact","location":"body"},{"value":"","msg":"Description is required","param":"description","location":"body"}]}
+[API Error][2023-01-07T22:08:27.341Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-01-07T22:11:32.882Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-01-07T22:15:57.756Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-01-08T06:20:55.158Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-01-08T06:55:36.822Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-01-08T07:48:10.132Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-01-08T07:59:25.188Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-01-08T08:25:48.018Z][#500]: {"type":"error","status":500,"message":"res5.json is not a function"}
+[API Error][2023-01-08T08:26:42.760Z][#500]: {"type":"error","status":500,"message":"res5.json is not a function"}
+[API Error][2023-01-08T08:27:47.052Z][#500]: {"type":"error","status":500,"message":"res5.json is not a function"}

@@ -155,33 +155,33 @@ const backgroundExtension = async (path, res1) => {
         }
 
 
-        // let uploadId2 = `${path}/${Math.random().toString(36)}${Math.random().toString(36)}`;
-        // const saveImg2 = await saveImageToFile(topExpended, uploadId2);
-        // if (!saveImg2) {
-        //     return next(new errorHandler(400, "Error saving image", saveImg2));
-        // }
+        let uploadId2 = `${path}/${Math.random().toString(36)}${Math.random().toString(36)}`;
+        const saveImg2 = await saveImageToFile(topExpended, uploadId2);
+        if (!saveImg2) {
+            return next(new errorHandler(400, "Error saving image", saveImg2));
+        }
         
-        // // flop the image along x-axis
-        // let  uploadId3 = `${path}/${Math.random().toString(36)}${Math.random().toString(36)}`;
-        // const image3_a= await sharp(topExpended).flop().toBuffer();  
-        // const saveImg3 = await saveImageToFile(image3_a, uploadId3);
-        // if (!saveImg3) {
-        //     return next(new errorHandler(400, "Error saving image", saveImg3));
-        // }
+        // flop the image along x-axis
+        let  uploadId3 = `${path}/${Math.random().toString(36)}${Math.random().toString(36)}`;
+        const image3_a= await sharp(topExpended).flop().toBuffer();  
+        const saveImg3 = await saveImageToFile(image3_a, uploadId3);
+        if (!saveImg3) {
+            return next(new errorHandler(400, "Error saving image", saveImg3));
+        }
 
-        // let  uploadId4 = `${path}/${Math.random().toString(36)}${Math.random().toString(36)}`;
-        // const image3_b= await sharp(bottomExpend).flop().toBuffer();  
-        // const saveImg4 = await saveImageToFile(image3_b, uploadId4);
-        // if (!saveImg4) {
-        //     return next(new errorHandler(400, "Error saving image", saveImg4));
-        // }
+        let  uploadId4 = `${path}/${Math.random().toString(36)}${Math.random().toString(36)}`;
+        const image3_b= await sharp(bottomExpend).flop().toBuffer();  
+        const saveImg4 = await saveImageToFile(image3_b, uploadId4);
+        if (!saveImg4) {
+            return next(new errorHandler(400, "Error saving image", saveImg4));
+        }
         res2.generation.push({
             "image_path": `http://localhost:4000/digsync/api/v0.1/uploads/${uploadId1}.png`,
-            // variation:{
-            //     bottom_right:`http://localhost:4000/digsync/api/v0.1/uploads/${uploadId2}.png`,
-            //     bottom_left:`http://localhost:4000/digsync/api/v0.1/uploads/${uploadId3}.png`,
-            //     top_left:`http://localhost:4000/digsync/api/v0.1/uploads/${uploadId4}.png`
-            // }
+            variation:{
+                bottom_right:`http://localhost:4000/digsync/api/v0.1/uploads/${uploadId2}.png`,
+                bottom_left:`http://localhost:4000/digsync/api/v0.1/uploads/${uploadId3}.png`,
+                top_left:`http://localhost:4000/digsync/api/v0.1/uploads/${uploadId4}.png`
+            }
         });
     }
     return res2;
