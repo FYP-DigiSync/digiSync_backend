@@ -70,40 +70,41 @@ class postController {
 
     // generate Graphics using midJourney
     midJourneyGraphics= async (req, res, next) => {
-        const {prompt}= req.body;
+        const {prompt} = req.body;
         if(!prompt){
             return next(new errorHandler(400, "Input validation error", errors));
         }
         // Request the MidJourney API to generate a post task
-        const request_a = await getMidJourneyImage(prompt);
+        // const request_a = await getMidJourneyImage(prompt);
 
 
         // get the recent post from midJourney
         let recentPost= await midJourneyRecentPostFetch();
         // wait for 1 minute and try again
-        await new Promise((resolve) => setTimeout(resolve, 80000));
+        // await new Promise((resolve) => setTimeout(resolve, 60000));
         
-        while(true){
-            if(!recentPost || !recentPost.data.length || !recentPost.data[0].image_paths){
-                return next(new errorHandler(400, "Error fetching recent post", recentPost));
-            }
-            // compare the prompt with the recent post prompt
-            if(recentPost.data[0].prompt === prompt){
-                break;
-            }else{
-                // wait for 30 seconds and try again
-                await new Promise((resolve) => setTimeout(resolve, 10000));
-                recentPost= await midJourneyRecentPostFetch();
-            }
-        }
+        // while(true){
+        //     if(!recentPost || !recentPost.data.length || !recentPost.data[0].image_paths){
+        //         return next(new errorHandler(400, "Error fetching recent post", recentPost));
+        //     }
+        //     // compare the prompt with the recent post prompt
+        //     if(recentPost.data[0].prompt === prompt){
+        //         break;
+        //     }else{
+        //         // wait for 30 seconds and try again
+        //         await new Promise((resolve) => setTimeout(resolve, 10000));
+        //         recentPost= await midJourneyRecentPostFetch();
+        //     }
+        // }
 
 
 
         // // Extension of the image
-        const extendedbackground= await backgroundExtension("midJourney",recentPost.data[0].image_paths); 
-        extendedbackground.prompt= recentPost.data[0].prompt;
+        // const extendedbackground= await backgroundExtension("midJourney",recentPost.data[0].image_paths); 
+        // extendedbackground.prompt= recentPost.data[0].prompt;
         // return res.status(200).json(recentPost.data);
-        res.status(200).json(extendedbackground);
+        // res.status(200).json(extendedbackground);
+        return res.status(200).json(recentPost.data);
         
     }
 

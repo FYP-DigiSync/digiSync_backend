@@ -1,4 +1,3 @@
-// KBMS API version 0.0.0.1 release
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
@@ -11,6 +10,9 @@ const errorMiddleware= require('./Middleware/errorMiddleware')
 const userRoute = require("./Routes/user");
 const postRoute = require("./Routes/post"); 
 const metaRoute = require("./Routes/meta"); 
+const templateRoute= require("./Routes/template");
+const linkedinRoute= require("./Routes/linkedin");
+
 
 
 // General ApI information
@@ -36,6 +38,10 @@ app.use(express_fileupload())
 app.use(`/${api_name}/api/v${api_version}/user`, userRoute);
 app.use(`/${api_name}/api/v${api_version}/post`, postRoute);
 app.use(`/${api_name}/api/v${api_version}/meta`, metaRoute);
+app.use(`/${api_name}/api/v${api_version}/template`, templateRoute);
+app.use(`/${api_name}/api/v${api_version}/linkedin`, linkedinRoute);
+
+
 
 // make upload folder static
 app.use(`/${api_name}/api/v${api_version}/Uploads`, express.static('Uploads'));
@@ -63,7 +69,7 @@ const mongoURL = process.env.MONGO_URL;
 mongoose.set("strictQuery", false);
 // Connect to MongoDB
 mongoose.connect(mongoURL, {
-  useNewUrlParser: true, useUnifiedTopology: true
+  useNewUrlParser: true, useUnifiedTopology: true 
 }).then(() => {
   app.listen(port, () => {
       console.log(`Server listening at port ${port}`)
