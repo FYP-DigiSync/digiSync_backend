@@ -6,7 +6,7 @@ const { addCredentialSchema,/*postSchema */ } = require('../Middleware/Validator
 const auth = require('../Middleware/authMiddleware');
 
 
-router.post('/addCredential', auth(), addCredentialSchema, asyncWrapper(linkedinController.addCredential));
+router.post('/addCredential', auth(), asyncWrapper(linkedinController.addCredential));
 
 router.post('/postImageOnLinkedin', auth()/*, postSchema*/, asyncWrapper(linkedinController.postImageOnLinkedin));
 
