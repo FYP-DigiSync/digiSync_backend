@@ -11,6 +11,7 @@ const errorMiddleware= require('./Middleware/errorMiddleware')
 const userRoute = require("./Routes/user");
 const postRoute = require("./Routes/post"); 
 const metaRoute = require("./Routes/meta"); 
+const linkedinRoute = require("./Routes/linkedin");
 
 
 // General ApI information
@@ -36,6 +37,7 @@ app.use(express_fileupload())
 app.use(`/${api_name}/api/v${api_version}/user`, userRoute);
 app.use(`/${api_name}/api/v${api_version}/post`, postRoute);
 app.use(`/${api_name}/api/v${api_version}/meta`, metaRoute);
+app.use(`/${api_name}/api/v${api_version}/linkedin`,linkedinRoute );
 
 // make upload folder static
 app.use(`/${api_name}/api/v${api_version}/Uploads`, express.static('Uploads'));
