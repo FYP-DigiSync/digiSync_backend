@@ -105,18 +105,24 @@ class linkedinController {
         }
         if (!req?.body?.data) {
             return next(new errorHandler(400, "Image not found"));
+
+
         }
 
-        const downloadResponse =  await   axios.get(imageUrl, {
-            responseType: 'arraybuffer'
-        })
-            
-        if(downloadResponse.status !== 200){
-            return next(new errorHandler(400, "Image not found"));
+        let text ="hello my first post";
+        //current directory lion.jpg image
+        
+        let data = req.body.data;
+        data = data.replace(/^data:image\/\w+;base64,/, "");
+        // display intial image byte
+        for (let i = 0; i < 5; i++) {
+            console.log(data[i]);
         }
+        console.log("dkddk")
 
-            
-        const image = Buffer.from(downloadResponse.data, 'binary').toString('base64');
+        const image = Buffer.from(data, 'base64');
+
+        
         console.log("binary image = ", image);
 
         //retrieve access token from database
@@ -127,9 +133,7 @@ class linkedinController {
         const access_token = user.access_token;
 
 
-        let text ="hello my first post";
-      //current directory lion.jpg image
-      let imageUrl ="https://cdn.wallpapersafari.com/58/13/Rnipol.jpg";
+        
 
      
       
