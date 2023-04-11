@@ -1,10 +1,43 @@
-[API Error][2023-01-08T14:27:52.980Z][#400]: {"type":"error","status":400,"message":"Image not found"}
-[API Error][2023-01-08T14:41:30.203Z][#413]: {"type":"error","status":413,"message":"request entity too large"}
-[API Error][2023-01-08T14:47:57.435Z][#500]: {"type":"error","status":500,"message":"file is not defined"}
-[API Error][2023-01-08T14:49:27.381Z][#500]: {"type":"error","status":500,"message":"connect ETIMEDOUT 157.240.227.1:443"}
-[API Error][2023-01-08T16:00:53.523Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
-[API Error][2023-01-08T16:01:01.698Z][#404]: {"type":"error","status":404,"message":"user not found in db","errors":[]}
-[API Error][2023-01-08T16:01:01.708Z][#404]: {"type":"error","status":404,"message":"user not found in db","errors":[]}
-[API Error][2023-01-08T16:01:05.956Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
-[API Error][2023-01-08T16:02:17.626Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"msg":"token is required","param":"token","location":"body"}]}
-[API Error][2023-01-08T20:47:00.739Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-04-09T19:29:21.848Z][#500]: {"type":"error","status":500,"message":"Internal server error!"}
+[API Error][2023-04-09T19:35:18.207Z][#500]: {"type":"error","status":500,"message":"saveImageToPath is not a function"}
+[API Error][2023-04-09T19:36:22.511Z][#500]: {"type":"error","status":500,"message":"saveImageToPath is not a function"}
+[API Error][2023-04-09T19:37:09.412Z][#500]: {"type":"error","status":500,"message":"file.mv is not a function"}
+[API Error][2023-04-11T14:11:33.592Z][#401]: {"type":"error","status":401,"message":"Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/"}
+[API Error][2023-04-11T14:17:00.760Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-04-11T14:25:10.178Z][#404]: {"type":"error","status":404,"message":"user not found in db","errors":[]}
+[API Error][2023-04-11T14:25:10.182Z][#404]: {"type":"error","status":404,"message":"user not found in db","errors":[]}
+[API Error][2023-04-11T14:25:18.979Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-04-11T14:25:20.257Z][#404]: {"type":"error","status":404,"message":"user not found in db","errors":[]}
+[API Error][2023-04-11T14:25:20.258Z][#404]: {"type":"error","status":404,"message":"user not found in db","errors":[]}
+[API Error][2023-04-11T14:25:28.786Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"value":"","msg":"token is required","param":"token","location":"body"}]}
+[API Error][2023-04-11T14:25:32.465Z][#404]: {"type":"error","status":404,"message":"user not found in db","errors":[]}
+[API Error][2023-04-11T14:25:32.466Z][#404]: {"type":"error","status":404,"message":"user not found in db","errors":[]}
+[API Error][2023-04-11T15:08:28.024Z][#500]: {"type":"error","status":500,"message":"emailTeams validation failed: teamName: Path `teamName` is required."}
+[API Error][2023-04-11T15:09:05.140Z][#500]: {"type":"error","status":500,"message":"emailTeams validation failed: teamName: Path `teamName` is required."}
+[API Error][2023-04-11T15:09:24.784Z][#400]: {"type":"error","status":400,"message":"Please enter the team Name"}
+[API Error][2023-04-11T15:25:50.712Z][#500]: {"type":"error","status":500,"message":"req is not defined"}
+[API Error][2023-04-11T15:26:40.854Z][#500]: {"type":"error","status":500,"message":"Cannot destructure property 'teamId' of 'req.body' as it is undefined."}
+[API Error][2023-04-11T15:28:04.254Z][#500]: {"type":"error","status":500,"message":"Cannot destructure property 'teamId' of 'req.body' as it is undefined."}
+[API Error][2023-04-11T15:44:57.864Z][#500]: {"type":"error","status":500,"message":"Cannot destructure property 'teamId' of 'req.body' as it is undefined."}
+[API Error][2023-04-11T15:46:16.491Z][#500]: {"type":"error","status":500,"message":"Cannot destructure property 'teamId' of 'req.body' as it is undefined."}
+[API Error][2023-04-11T15:47:02.782Z][#500]: {"type":"error","status":500,"message":"Cannot destructure property 'teamId' of 'req.body' as it is undefined."}
+[API Error][2023-04-11T15:49:08.920Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"msg":"teamId is required","param":"teamId","location":"body"},{"msg":"memberName text is required","param":"memberName","location":"body"},{"msg":"memberEmail text is required","param":"memberEmail","location":"body"}]}
+[API Error][2023-04-11T15:51:46.454Z][#500]: {"type":"error","status":500,"message":"Internal Server Error"}
+[API Error][2023-04-11T15:52:50.447Z][#500]: {"type":"error","status":500,"message":"Internal Server Error"}
+[API Error][2023-04-11T16:34:39.320Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2023-04-11T16:34:45.479Z][#500]: {"type":"error","status":500,"message":"Internal Server Error"}
+[API Error][2023-04-11T16:34:54.463Z][#500]: {"type":"error","status":500,"message":"Internal Server Error"}
+[API Error][2023-04-11T16:35:00.454Z][#500]: {"type":"error","status":500,"message":"Internal Server Error"}
+[API Error][2023-04-11T16:35:35.043Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2023-04-11T16:35:42.001Z][#400]: {"type":"error","status":400,"message":"Please enter the team Name"}
+[API Error][2023-04-11T16:36:47.662Z][#404]: {"type":"error","status":404,"message":"Routes Not found"}
+[API Error][2023-04-11T16:36:54.695Z][#500]: {"type":"error","status":500,"message":"Internal Server Error"}
+[API Error][2023-04-11T16:41:31.428Z][#500]: {"type":"error","status":500,"message":"Internal Server Error"}
+[API Error][2023-04-11T16:45:05.508Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"msg":"teamId is required","param":"teamId","location":"body"},{"msg":"member Id is required","param":"_id","location":"body"}]}
+[API Error][2023-04-11T16:45:46.648Z][#400]: {"type":"error","status":400,"message":"Unexpected token \" in JSON at position 0"}
+[API Error][2023-04-11T16:45:52.570Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"msg":"member Id is required","param":"_id","location":"body"}]}
+[API Error][2023-04-11T16:46:00.544Z][#500]: {"type":"error","status":500,"message":"Cannot read properties of undefined (reading '_id')"}
+[API Error][2023-04-11T16:47:10.453Z][#500]: {"type":"error","status":500,"message":"Cannot read properties of undefined (reading '_id')"}
+[API Error][2023-04-11T17:53:01.655Z][#500]: {"type":"error","status":500,"message":"Internal Server Error"}
+[API Error][2023-04-11T17:54:48.161Z][#500]: {"type":"error","status":500,"message":"Internal Server Error"}
+[API Error][2023-04-11T17:54:53.874Z][#400]: {"type":"error","status":400,"message":"Input validation failed","errors":[{"msg":"memberNumber is required","param":"memberNumber","location":"body"}]}
