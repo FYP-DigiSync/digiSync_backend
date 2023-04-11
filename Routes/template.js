@@ -6,7 +6,10 @@ const {createTemplateSchema} = require('../Middleware/Validators/templateValidat
 
 
 router.post('/', createTemplateSchema, asyncWrapper(templateController.createTemplate));
+router.get('/', asyncWrapper(templateController.getTemplates));
+router.get('/:category', asyncWrapper(templateController.getSingleTemplate));
 
+router.post('/sendTemplateEmail', asyncWrapper(templateController.sendEmail));
 
 
 module.exports = router; 

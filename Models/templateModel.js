@@ -5,7 +5,7 @@ const templateSchema = mongoose.Schema({
         type:String, 
         required:true,
     },
-    "catagory":{
+    "category":{
         type:String, 
         required:true,
     },

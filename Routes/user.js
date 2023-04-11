@@ -8,8 +8,15 @@ const {createUserSchema,signInUserSchema}= require('../Middleware/Validators/use
 
 
 // routes
+// create a new user
 router.post('/', createUserSchema, asyncWrapper(userController.createUser));
+// update user Info 
+router.patch('/',auth(), asyncWrapper(userController.updateUserInfo));
+// update the user profile
+router.patch('/uploadProfile', auth(), asyncWrapper(userController.updateProfile));
+// get the user info using the authentication token
 router.get('/whoami',auth(), asyncWrapper(userController.decodetoken));
+// sign of the user using email, password // JWT is send back
 router.post('/signin', signInUserSchema, asyncWrapper(userController.signIn));
 
 module.exports = router;

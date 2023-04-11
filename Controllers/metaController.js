@@ -12,7 +12,7 @@ const sharp = require('sharp');
 
 
 const storage = new Storage({
-    keyFilename: './Utils/digisync-c9aa1-firebase-adminsdk-qn02h-0045992fcb.json',
+    keyFilename: './Utils/digisyncfireSdk.json',
 });
 const bucketName = process.env.FIREBASE_BUCKET;
 class metaController {
@@ -95,41 +95,31 @@ class metaController {
         }
         return res.status(201).json("success");
     }
+
+
+    // Handle post to facebook
     postOnFB = async (req, res, next) => {
-        
+        console.log("djddjdjd");
         if (!req?.body?.message) {
             return next(new errorHandler(400, "caption not found"));
         }
         if (!req?.body?.data) {
             return next(new errorHandler(400, "Image not found"));
         }
+
         
         let data = req.body.data;
         data = data.replace(/^data:image\/\w+;base64,/, "");
         
         const buffer = Buffer.from(data, 'base64');
         const res1_a = await sharp(buffer).jpeg().toBuffer();
-        // console.log('dldld');
         
         
         const uploadId = `${Math.random().toString(36)}${Math.random().toString(36)}`;
         console.log(uploadId);
-        const path = `./Uploads/${uploadId}.jpeg`;
+        const path = `./Uploads/fbPost/${uploadId}.jpeg`;
         fs.writeFileSync(`${path}`, res1_a);
-        const path1 = `${uploadId}.jpg`;
 
-
-        // const file = req.files.picture;
-        // const uploadId = `${Math.random().toString(36)}${Math.random().toString(36)}`;
-        // const path1 = `${uploadId}.${file.name.split(".")[1]}`;
-        // const file = req.files.picture;
-        // const uploadId = `${Math.random().toString(36)}${Math.random().toString(36)}`;
-        // const path = `./Uploads/${uploadId}.${file.name.split(".")[1]}`;
-        // await file.mv(path, (err) => {
-        //     if (err) {
-        //         return next(new errorHandler(400, "Error saving file", err));
-        //     }
-        // })
 
         const id = await metaModel.findOne({ user: req.thisuser })
         if (!id) {
@@ -155,6 +145,9 @@ class metaController {
         });
 
     }
+
+
+
     schedulePostOnFB = async (req, res, next) => {
         if (!req?.body?.message) {
             return next(new errorHandler(400, "caption not found"));
@@ -182,20 +175,10 @@ class metaController {
         
         const uploadId = `${Math.random().toString(36)}${Math.random().toString(36)}`;
         console.log(uploadId);
-        const path = `./Uploads/${uploadId}.jpeg`;
+        const path = `./Uploads/fbPost/${uploadId}.jpeg`;
         fs.writeFileSync(`${path}`, res1_a);
 
-
-        // const file = req.files.picture;
-        // const uploadId = `${Math.random().toString(36)}${Math.random().toString(36)}`;
-        // const path1 = `${uploadId}.${file.name.split(".")[1]}`;
         const path1 = `${uploadId}.jpg`;
-        // const path = `./Uploads/${path1}`;
-        // await file.mv(path, (err) => {
-        //     if (err) {
-        //         return next(new errorHandler(400, "Error saving file", err));
-        //     }
-        // })
 
         const generationMatchPrecondition = 0
         const options = {
@@ -239,6 +222,7 @@ class metaController {
     }
 
     postOnInsta = async (req, res, next) => {
+        console.log("djdjddjd");
         if (!req?.body?.message) {
             return next(new errorHandler(400, "caption not found"));
         }
@@ -248,6 +232,7 @@ class metaController {
         // console.log(req.body.message);
 
         let data = req.body.data;
+        console.log(data);
         data = data.replace(/^data:image\/\w+;base64,/, "");
         // display intial image byte
         for (let i = 0; i < 5; i++) {
@@ -256,17 +241,18 @@ class metaController {
         console.log("dkddk")
 
         const buffer = Buffer.from(data, 'base64');
+        console.log('dldld');
         const res1_a = await sharp(buffer).jpeg().toBuffer();
-        // console.log('dldld');
+        console.log('dldld');
 
 
         const uploadId = `${Math.random().toString(36)}${Math.random().toString(36)}`;
         console.log(uploadId);
-        const path = `./Uploads/${uploadId}.jpeg`;
+        const path = `./Uploads/fbPost/${uploadId}.jpeg`;
         fs.writeFileSync(`${path}`, res1_a);
 
 
-        // console.log("dkjddj");
+        console.log("dkjddj");
 
 
         const path1 = `${uploadId}.jpg`;
@@ -347,7 +333,7 @@ class metaController {
         const file = req.files.picture;
         const uploadId = `${Math.random().toString(36)}${Math.random().toString(36)}`;
         const path1 = `${uploadId}.${file.name.split(".")[1]}`;
-        const path = `./Uploads/${path1}`;
+        const path = `./Uploads/fbPost/${path1}`;
         await file.mv(path, (err) => {
             if (err) {
                 return next(new errorHandler(400, "Error saving file", err));

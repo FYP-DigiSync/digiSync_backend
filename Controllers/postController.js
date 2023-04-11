@@ -8,33 +8,11 @@ const midJourneyRecentPostFetch = require("../Utils/midJourney");
 const backgroundExtension= require("../Utils/backgroundExtension");
 const getHashtags = require("../Utils/hashtagsGenerate");
 const dummyData = require("../Utils/dummydata");
-const getMidJourneyImage = require('./temp1');
-
+const getMidJourneyImage = require('../Utils/midjourneyRequest');
 const posterModel= require('../Models/posterModel');
-
-// const getPalette = require('dont-crop').getPaletteFromImageData;
-// const fitGradient = require('dont-crop').fitGradientToImageData;
 
 
 class postController {
-
-    // getImageData = async(path)=> {
-    //     let image = sharp(path).resize(440, 440);
-    //     const { data, info } = await image
-    //       .ensureAlpha()
-    //       .toColorspace('srgb')
-    //       .raw()
-    //       .toBuffer({ resolveWithObject: true });
-    //     if (data.length !== info.width * info.height * 4) {
-    //       throw new Error(`Invalid image dimensions ${data.length} != ${info.width} * ${info.height} * 4`);
-    //     }
-    //     const imageData = {
-    //       width: info.width,
-    //       height: info.height,
-    //       data: new Uint8ClampedArray(data.buffer),
-    //     };
-    //     return imageData;
-    // }
 
     // Generate graphics using Dalle2 API
     generateGraphics = async (req, res, next) => {
@@ -70,39 +48,41 @@ class postController {
 
     // generate Graphics using midJourney
     midJourneyGraphics= async (req, res, next) => {
+
         const {prompt} = req.body;
+        console.log("prompt", prompt);
         if(!prompt){
             return next(new errorHandler(400, "Input validation error", errors));
         }
         // Request the MidJourney API to generate a post task
-        // const request_a = await getMidJourneyImage(prompt);
+        const request_a = await getMidJourneyImage(prompt);
 
 
         // get the recent post from midJourney
         let recentPost= await midJourneyRecentPostFetch();
         // wait for 1 minute and try again
-        // await new Promise((resolve) => setTimeout(resolve, 60000));
+        await new Promise((resolve) => setTimeout(resolve, 60000));
         
-        // while(true){
-        //     if(!recentPost || !recentPost.data.length || !recentPost.data[0].image_paths){
-        //         return next(new errorHandler(400, "Error fetching recent post", recentPost));
-        //     }
-        //     // compare the prompt with the recent post prompt
-        //     if(recentPost.data[0].prompt === prompt){
-        //         break;
-        //     }else{
-        //         // wait for 30 seconds and try again
-        //         await new Promise((resolve) => setTimeout(resolve, 10000));
-        //         recentPost= await midJourneyRecentPostFetch();
-        //     }
-        // }
+        while(true){
+            if(!recentPost || !recentPost.data.length || !recentPost.data[0].image_paths){
+                return next(new errorHandler(400, "Error fetching recent post", recentPost));
+            }
+            // compare the prompt with the recent post prompt
+            if(recentPost.data[0].prompt === prompt){
+                break;
+            }else{
+                // wait for 30 seconds and try again
+                await new Promise((resolve) => setTimeout(resolve, 10000));
+                recentPost= await midJourneyRecentPostFetch();
+            }
+        }
 
 
 
         // // Extension of the image
-        // const extendedbackground= await backgroundExtension("midJourney",recentPost.data[0].image_paths); 
-        // extendedbackground.prompt= recentPost.data[0].prompt;
-        // return res.status(200).json(recentPost.data);
+        const extendedbackground= await backgroundExtension("midJourney",recentPost.data[0].image_paths); 
+        extendedbackground.prompt= recentPost.data[0].prompt;
+        return res.status(200).json(recentPost.data);
         // res.status(200).json(extendedbackground);
         return res.status(200).json(recentPost.data);
         

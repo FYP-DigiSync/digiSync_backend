@@ -12,6 +12,9 @@ const postRoute = require("./Routes/post");
 const metaRoute = require("./Routes/meta"); 
 const templateRoute= require("./Routes/template");
 const linkedinRoute= require("./Routes/linkedin");
+const smsRoute= require('./Routes/sms');
+const EmailRoute= require('./Routes/emailTeam');
+
 
 
 
@@ -40,6 +43,11 @@ app.use(`/${api_name}/api/v${api_version}/post`, postRoute);
 app.use(`/${api_name}/api/v${api_version}/meta`, metaRoute);
 app.use(`/${api_name}/api/v${api_version}/template`, templateRoute);
 app.use(`/${api_name}/api/v${api_version}/linkedin`, linkedinRoute);
+app.use(`/${api_name}/api/v${api_version}/sms`, smsRoute);
+app.use(`/${api_name}/api/v${api_version}/email`, EmailRoute);
+
+
+
 
 
 

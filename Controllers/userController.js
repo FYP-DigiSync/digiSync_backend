@@ -4,6 +4,7 @@ const {generateSimpleJWT}= require('../Utils/token');
 const errorHandler= require('../Utils/errorHandler');
 const {hashPassword,verifyHashPassword}=require('../Utils/encrptPassword');
 const userModel = require('../Models/userModel');
+const {saveImageToPath} = require('../Utils/promisfyCallback');
 
 
 class userController{
@@ -29,6 +30,39 @@ class userController{
         return res.status(201).json({token: jwt});
     }
 
+    // update the user profile
+    updateProfile= async(req,res,next)=>{
+        console.log(req.thisuser);
+        
+        if(!req?.files?.file){
+            return next(new errorHandler(400, "File not added in correct header"));
+        }
+        const uploadId = `${Math.random().toString(36)}${Math.random().toString(36)}`;
+        const path = `./Uploads/profiles/${uploadId}.jpeg`;
+        const file= req.files.file; 
+
+        const res1= await saveImageToPath(path,file);
+        if(!res1){
+            return next(new errorHandler(500, "Internal server error!", res1));
+        }
+        // update the userProfile Image Info
+        const res2= await userModel.findByIdAndUpdate(req.thisuser._id, {profileImage:path});
+        if(!res2 || !res2?._id){
+            return next(new errorHandler(500, "Failed to update Image at the moment!", res1));
+        }
+        
+        return res.json({msg:"Profile Image update sucessfully"});
+    }
+
+    // update the user Info
+    updateUserInfo= async(req,res,next)=>{
+        // update the userProfile Image Info
+        const res2= await userModel.findByIdAndUpdate(req.thisuser._id, req.body);
+        if(!res2 || !res2?._id){
+            return next(new errorHandler(500, "Failed to update Image at the moment!", res1));
+        }
+        return res.json({msg:"Profile Image update sucessfully"});
+    }
 
     // get a user with the given id
     decodetoken = async(req, res, next) => {
@@ -36,8 +70,7 @@ class userController{
         return res.status(200).json({firstName,lastName, email});
     }
 
-
-    // User SignIn
+    // User SignIn, return the JWT
     signIn = async (req, res, next) => {
         const err = validationResult(req);
         if (!err.isEmpty()) {
