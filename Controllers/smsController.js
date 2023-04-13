@@ -1,7 +1,7 @@
 const errorHandler = require('../Utils/errorHandler');
 const smsTeamModel = require('../Models/smsteamModel');
 const {validationResult}= require('express-validator');
-
+const emailRequestHander= require('../Utils/emailRequestHander');
 
 class SMSController {
 
@@ -87,11 +87,27 @@ class SMSController {
         return res.status(200).json("SMS team delete was sucessfull");
     }
 
-    
+
     // generate an SMS for the marketing 
     generateSMS = async (req, res, next) => {
+        const err = validationResult(req);
+        if (!err.isEmpty()) {
+            return next(new errorHandler(400, "Input validation failed", err));
+        }
+        const obj= {token_count:1024, n_gen:1};
+        const {prompt,temperature,output_length,keywords}= req.body;
+        const listKeyword = keywords.split(',').map((item) => item.trim());
+        const floatTemp = parseFloat(temperature);
+        console.log(listKeyword, floatTemp);
+        const res1= await emailRequestHander({...obj, prompt,temperature:floatTemp,output_length,keywords:listKeyword});
         
-        return res.json({data:completion.data});
+        if(!res1 || !res1.data){
+            return next(new errorHandler(400, "Error getting poster content", res1));
+        }
+        
+        // res1.data.__text="";
+
+        return res.json(res1.data);
     }
 
 }

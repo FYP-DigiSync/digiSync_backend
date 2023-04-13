@@ -16,6 +16,15 @@ class emailTeamController {
         return res.status(200).json(res1);
     }
 
+    // get all the team of the user 
+    getById = async (req, res, next) => {
+        const res1 = await emailTeamModel.findById(req.params.teamId);
+        if (!res1) {
+            return next(new errorHandler(400, "Please enter the team Name"));
+        }
+        return res.status(200).json(res1);
+    }
+
 
     // create a team 
     createEmailTeam = async (req, res, next) => {
@@ -63,6 +72,7 @@ class emailTeamController {
 
     // delete Member from the Team 
     deleteMemberFromTeam = async(req,res,next) => {
+        console.log(req.body)
         const err = validationResult(req);
         if (!err.isEmpty()) {
             return next(new errorHandler(400, "Input validation failed", err));
@@ -75,14 +85,21 @@ class emailTeamController {
             return next(new errorHandler(500, "Internal Server Error", res1));
         }
         // append the value to the list
-        const res2 = res1.emailList.filter((item)=>item._id!==_id );
+    
+        const res2 = res1.emailList.filter((item)=>item._id.toString() !==_id );
+        console.log(res2);
+        
         const res3 = await emailTeamModel.findByIdAndUpdate(teamId, {emailList:res2});
         if(!res3){
             return next(new errorHandler(500, "Internal Server Error", res3));
         }
+
         return res.status(200).json("Member removed sucessfully");
 
     }
+
+
+
 
     // delete the team 
     deleteTeam = async(req,res,next) => {

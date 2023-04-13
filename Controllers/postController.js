@@ -48,18 +48,18 @@ class postController {
 
     // generate Graphics using midJourney
     midJourneyGraphics= async (req, res, next) => {
-
-        const {prompt} = req.body;
-        console.log("prompt", prompt);
+        let {prompt} = req.body;
+        prompt= `${prompt} dark background abstract art graphic artistic creative`;
+        console.log("prompt::", prompt);
         if(!prompt){
             return next(new errorHandler(400, "Input validation error", errors));
         }
         // Request the MidJourney API to generate a post task
-        const request_a = await getMidJourneyImage(prompt);
-
+        const request_a = getMidJourneyImage(prompt);
 
         // get the recent post from midJourney
         let recentPost= await midJourneyRecentPostFetch();
+
         // wait for 1 minute and try again
         await new Promise((resolve) => setTimeout(resolve, 60000));
         
@@ -67,8 +67,10 @@ class postController {
             if(!recentPost || !recentPost.data.length || !recentPost.data[0].image_paths){
                 return next(new errorHandler(400, "Error fetching recent post", recentPost));
             }
+            console.log(recentPost.data[0].full_command);
             // compare the prompt with the recent post prompt
-            if(recentPost.data[0].prompt === prompt){
+            if(recentPost.data[0].full_command === prompt){
+                console.log(recentPost.data[0].full_command);
                 break;
             }else{
                 // wait for 30 seconds and try again
@@ -81,11 +83,11 @@ class postController {
 
         // // Extension of the image
         const extendedbackground= await backgroundExtension("midJourney",recentPost.data[0].image_paths); 
-        extendedbackground.prompt= recentPost.data[0].prompt;
-        return res.status(200).json(recentPost.data);
-        // res.status(200).json(extendedbackground);
-        return res.status(200).json(recentPost.data);
-        
+        // extendedbackground.prompt= recentPost.data[0].prompt;
+        // return res.status(200).json(recentPost.data);
+        res.status(200).json(extendedbackground);
+        // res.send("sucess");
+        // return res.status(200).json(recentPost.data);   
     }
 
     getListOfgeneration= async (req, res, next) => {
@@ -174,47 +176,51 @@ class postController {
         const res3= res2.filter((item, index, self) => index === self.findIndex((t) => (t[0] === item[0])));
 
         // make comma separated string from res3
-        const res4= res3.map((item)=> item[0]).join(", ");
-        
+        let res4= res3.map((item)=> item[0]).join("%2C+");
+        res4= res4.split(' ').join('%2C+');
+        res4= res4.split('%2C+'); 
+        // remove duplicate item from the list
+        res4= res4.filter((item, index, self) => index === self.findIndex((t) => (t === item)));
+        res4= res4.join("%2C+");
         const res5= await getHashtags(res4);
-        let res6= await res5.json();
-        if(!res6 || !res6.data || !res6.data.similarHashtagsLists){
+        if(!res5 || !res5?.tags_by_relevancy || !res5?.tags_by_count){
             return next(new errorHandler(500, "Internal server Error", res5));
         }
-        
-        res6= res6.data.similarHashtagsLists;
-        // dummy data combile all hashtag value to single list
-        
-        const res7= res6.map((item)=> item.hashtags);
-        let endResult=[];
-        for(let i=0; i<res7.length; i++){
-            endResult= [...endResult, ...res7[i]];
-        }
-        console.log(res3);
 
-        // filter the value to remove hidden hashtag
-        const res8= endResult.filter((item)=> item.isHidden===false);
+        let endResult= [];
 
-
-        for(let i=0; i<res3.length; i++){
-            res8.push({
-                "id": Math.random().toString(36),
-                "name": res3[i][0],
-                "mediaCount": "170581800",
+        for(let i=0; i<res5.tags_by_relevancy.length; i++){
+            endResult.push({
+                "id": `${Math.random().toString(36)}${Math.random().toString(24)}`,
+                "name": res5.tags_by_relevancy[i].tag.slice(1),
+                "mediaCount": res5.tags_by_relevancy[i].count,
                 "selected": false,
                 "isHidden": false,
                 "isSmart": false,
                 "isInstaRelated": false
             });
         }
-        // res.status(200).json(res6.data.similarHashtagsLists);
-        res.status(200).json(res8);
+
+        for(let i=0; i<res5.tags_by_count.length; i++){
+            endResult.push({
+                "id": `${Math.random().toString(36)}${Math.random().toString(24)}`,
+                "name": res5.tags_by_count[i].tag.slice(1),
+                "mediaCount": res5.tags_by_count[i].count,
+                "selected": false,
+                "isHidden": false,
+                "isSmart": false,
+                "isInstaRelated": false
+            });
+        }
+        // filter the duplicate item from the list
+        endResult= endResult.filter((item, index, self) => index === self.findIndex((t) => (t.name === item.name)));
+        res.status(200).json(endResult);
     }
 
 
     // get posters 
     getSavedPoster= async(req,res, next)=>{
-        const result= await posterModel.find({userId: req.thisuser._id});
+        const result= await posterModel.find({userId: req.thisuser._id}).sort({ createdAt: 1 });
         if(!result){
             return next(new errorHandler(400, "Error getting poster content", res));
         }

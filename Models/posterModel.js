@@ -43,6 +43,8 @@ const posterSchema = mongoose.Schema({
     hashtag: {
         type: String
     }
+}, {
+    timestamps: true,
 });
 
 const posterModel = mongoose.model('posterModel', posterSchema);

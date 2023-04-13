@@ -66,8 +66,8 @@ class userController{
 
     // get a user with the given id
     decodetoken = async(req, res, next) => {
-        const { firstName,lastName, email  } =req.thisuser;
-        return res.status(200).json({firstName,lastName, email});
+        const { firstName,lastName, email,profileImage="" } =req.thisuser;
+        return res.status(200).json({firstName,lastName, email,profileImage});
     }
 
     // User SignIn, return the JWT

@@ -28,7 +28,6 @@
     "node-fetch": "^2.6.7",
     "nodemailer": "^6.9.1",
     "nodemon": "^2.0.20",
-    "openai": "^3.2.1",
     "sharp": "^0.31.1",
     "uuid-v4": "^0.1.0"
   }

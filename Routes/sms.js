@@ -4,12 +4,12 @@ const smsController= require('../Controllers/smsController');
 const asyncWrapper= require('../Middleware/asycWrapper');
 const auth= require('../Middleware/authMiddleware');
 // validation for request body
-const {updateTeamSMSListSchema, deleteTeamSMSSchema}= require('../Middleware/Validators/smsTeamValidator');
+const {updateTeamSMSListSchema, deleteTeamSMSSchema, generateSMSSchema}= require('../Middleware/Validators/smsTeamValidator');
 
 // routes
 
 // generate the marketing SMS body
-router.post('/generate',auth(), asyncWrapper(smsController.generateSMS));
+router.post('/generate',generateSMSSchema,auth(), asyncWrapper(smsController.generateSMS));
 
 // get all the created teams
 router.get('/team', auth(), asyncWrapper(smsController.getALLSMSTeam));

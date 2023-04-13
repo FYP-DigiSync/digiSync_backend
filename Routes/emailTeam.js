@@ -10,6 +10,8 @@ const {updateTeamEmailListSchema,deleteTeamEmailListSchema}= require('../Middlew
 // routes
 // get all the created teams
 router.get('/team', auth(), asyncWrapper(emailTeamController.getALLEmailTeam));
+router.get('/team/:teamId', auth(), asyncWrapper(emailTeamController.getById));
+
 // create a new team
 router.post('/team', auth(), asyncWrapper(emailTeamController.createEmailTeam));
 

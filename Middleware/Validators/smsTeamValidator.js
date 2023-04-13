@@ -11,5 +11,11 @@ const deleteTeamSMSSchema = [
     body('_id').exists({ checkFalsy: true }).withMessage("member Id is required").bail(),
 ]
 
+const generateSMSSchema = [
+   body("prompt").exists({ checkFalsy: true }).withMessage("prompt is required").bail(),
+   body("temperature").exists({ checkFalsy: true }).withMessage("teperature is required").bail(),
+   body("output_length").exists({ checkFalsy: true }).withMessage("output_length is required").bail(),
+   body("keywords").exists({ checkFalsy: true }).withMessage("keywords list is required").bail(),
+]
 
-module.exports = {updateTeamSMSListSchema, deleteTeamSMSSchema};
+module.exports = {updateTeamSMSListSchema, deleteTeamSMSSchema,generateSMSSchema};
