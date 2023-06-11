@@ -14,6 +14,7 @@ const templateRoute= require("./Routes/template");
 const linkedinRoute= require("./Routes/linkedin");
 const smsRoute= require('./Routes/sms');
 const EmailRoute= require('./Routes/emailTeam');
+const WhatsappRoute= require('./Routes/whatsapp');
 
 
 
